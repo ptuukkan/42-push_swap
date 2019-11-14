@@ -1,0 +1,62 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_stack.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ptuukkan <ptuukkan@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/14 11:52:25 by ptuukkan          #+#    #+#             */
+/*   Updated: 2019/11/06 09:36:10 by ptuukkan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "push_swap.h"
+#include <stdio.h>
+
+static int	check_duplicate(t_list *stack_a, int nb)
+{
+	int	i;
+
+	i = 0;
+	while (stack_a != NULL)
+	{
+		if (nb == *(int *)stack_a->content)
+			i++;
+		stack_a = stack_a->next;
+	}
+	if (i != 1)
+		return (0);
+	return (1);
+}
+
+static int	check_digits(char *str)
+{
+	while(*str != '\0')
+	{
+		if (ft_isdigit(*str) == 0)
+			return (0);
+		str++;
+	}
+	return (1);
+}
+
+int			init_stack(char **argv, t_list **stack_a)
+{
+	long long	lnb;
+	int			nb;
+
+	while (*argv)
+	{
+		if (!check_digits(*argv))
+			return (0);
+		lnb = atoll(*argv);
+		if (lnb > 2147483647 || lnb < -2147483648)
+			return (0);
+		nb = (int)lnb;
+		ft_lstapp(stack_a, ft_lstnew(&nb, sizeof(nb)));
+		if (!check_duplicate(*stack_a, nb))
+			return (0);
+		argv++;
+	}
+	return (1);
+}
