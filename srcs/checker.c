@@ -13,6 +13,19 @@
 #include "push_swap.h"
 #include <stdio.h>
 
+
+void		print_stack(t_list *stack)
+{
+	int	nb;
+
+	while (stack != NULL)
+	{
+		nb = *(int *)stack->content;
+		printf("%d\n", nb);
+		stack = stack->next;
+	}
+}
+
 int			main(int argc, char **argv)
 {
 	char	*line;
@@ -25,13 +38,13 @@ int			main(int argc, char **argv)
 		return (1);
 	if (!init_stack(argv + 1, &stack_a))
 		return (print_error());
-	while (get_next_line(0, &line))
+	while (get_next_line(0, &line) && *line != '\0')
 	{
 		if (!exec_operation(line, &stack_a, &stack_b))
 			return (print_error());
 		ft_strdel(&line);
 	}
-	if (!check_order(stack_a))
+	if (!check_order(stack_a) || !check_empty(stack_b))
 	{
 		printf("KO\n");
 		return (0);

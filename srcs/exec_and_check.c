@@ -23,7 +23,7 @@ int	check_order(t_list *stack)
 	int	nb1;
 	int	nb2;
 
-	while (stack != NULL)
+	while (stack->next != NULL)
 	{
 		nb1 = *(int *)stack->content;
 		nb2 = *(int *)stack->next->content;
@@ -32,6 +32,13 @@ int	check_order(t_list *stack)
 		stack = stack->next;
 	}
 	return (1);
+}
+
+int	check_empty(t_list *stack)
+{
+	if (stack == NULL)
+		return (1);
+	return (0);
 }
 
 int	exec_operation(char *instruction, t_list **stack_a, t_list **stack_b)

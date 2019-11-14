@@ -22,6 +22,7 @@ void	swap(t_list **stack)
 	if ((*stack)->next == NULL)
 		return ;
 	temp = (*stack)->next;
+	(*stack)->next = temp->next;
 	temp->next = *stack;
 	*stack =  temp;
 }

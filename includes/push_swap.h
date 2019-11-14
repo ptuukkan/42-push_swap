@@ -24,6 +24,7 @@ void	rotate_ab(t_list **stack_a, t_list **stack_b);
 void	reverse_rotate(t_list **stack);
 void	reverse_rotate_ab(t_list **stack_a, t_list **stack_b);
 int		check_order(t_list *stack);
+int		check_empty(t_list *stack);
 int		exec_operation(char *instruction, t_list **stack_a, t_list **stack_b);
 int		print_error(void);
 

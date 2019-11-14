@@ -18,8 +18,8 @@ void	push(t_list **stack_from, t_list **stack_to)
 
 	if (stack_from == NULL)
 		return ;
-	temp = *stack_from;
+	temp = (*stack_from)->next;
 	(*stack_from)->next = *stack_to;
 	*stack_to = *stack_from;
-	*stack_from = temp->next;
+	*stack_from = temp;
 }
