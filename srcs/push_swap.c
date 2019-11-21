@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ptuukkan <ptuukkan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/14 11:52:25 by ptuukkan          #+#    #+#             */
-/*   Updated: 2019/11/06 09:36:10 by ptuukkan         ###   ########.fr       */
+/*   Created: 2019/11/21 10:51:53 by ptuukkan          #+#    #+#             */
+/*   Updated: 2019/11/21 10:51:54 by ptuukkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
+void	print_operations(t_list *operations)
+{
+	while (operations)
+	{
+		ft_putendl((char *)operations->content);
+		operations = operations->next;
+	}
+}
 
 void		print_stack(t_list *stack)
 {
@@ -26,34 +34,30 @@ void		print_stack(t_list *stack)
 	}
 }
 
-int			main(int argc, char **argv)
+t_list	*choose_algorithm(t_list *stack_a, t_list *stack_b, t_list *operations)
 {
-	char	*line;
+	size_t	n;
+
+	n = ft_lstsize(stack_a) / 4;
+	sort_selection(stack_a, stack_b, &operations, n);
+	return (operations);
+}
+
+int		main(int argc, char **argv)
+{
 	t_list	*stack_a;
 	t_list	*stack_b;
+	t_list	*operations;
 
 	stack_a = NULL;
 	stack_b = NULL;
+	operations = NULL;
+	printf("%s\n", argv[1]);
 	if (argc == 1)
 		return (1);
 	if (!init_stack(argv + 1, &stack_a))
 		return (print_error());
-	while (get_next_line(0, &line) && *line != '\0')
-	{
-		printf("line is : %s\n", line);
-		if (!exec_operation(line, &stack_a, &stack_b))
-			return (print_error());
-		printf("Stack A:\n");
-		print_stack(stack_a);
-		printf("Stack B:\n");
-		print_stack(stack_b);
-		ft_strdel(&line);
-	}
-	if (!check_order(stack_a) || !check_empty(stack_b))
-	{
-		ft_putstr("KO\n");
-		return (0);
-	}
-	ft_putstr("OK\n");
+	operations = choose_algorithm(stack_a, stack_b, operations);
+	print_operations(operations);
 	return (0);
 }

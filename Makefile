@@ -15,7 +15,7 @@ NAME = push_swap
 LIB = libft.a
 SRCDIR = srcs
 SRCS = exec_and_check.c init_stack.c push_operations.c rotate_operations.c \
-		swap_operations.c
+		swap_operations.c sort_selection.c
 
 OBJDIR = objects
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)

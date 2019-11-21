@@ -40,11 +40,28 @@ static int	check_digits(char *str)
 	return (1);
 }
 
+static int	check_multiple(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (*str != '\0')
+	{
+		if (*str == ' ' && ft_isdigit(*(str + 1)) == 1)
+			i++;
+		str++;
+	}
+	return (i);
+}
+
+
 int			init_stack(char **argv, t_list **stack_a)
 {
 	long long	lnb;
 	int			nb;
 
+	if (check_multiple(*argv))
+		argv = ft_strsplit(*argv, ' ');
 	while (*argv)
 	{
 		if (!check_digits(*argv))

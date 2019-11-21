@@ -27,5 +27,8 @@ int		check_order(t_list *stack);
 int		check_empty(t_list *stack);
 int		exec_operation(char *instruction, t_list **stack_a, t_list **stack_b);
 int		print_error(void);
+void	sort_selection(t_list *stack_a, t_list *stack_b, t_list **operations, size_t n);
+void	print_operations(t_list *operations);
+void	print_stack(t_list *stack);
 
 #endif
