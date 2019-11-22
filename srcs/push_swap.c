@@ -34,12 +34,10 @@ void		print_stack(t_list *stack)
 	}
 }
 
-t_list	*choose_algorithm(t_list *stack_a, t_list *stack_b, t_list *operations)
+t_list	*choose_algorithm(t_list **stack_a, t_list **stack_b, t_list *operations)
 {
-	size_t	n;
 
-	n = ft_lstsize(stack_a) / 4;
-	sort_quick(stack_a, stack_b, &operations, n);
+	sort_quick(stack_a, stack_b, &operations);
 	return (operations);
 }
 
@@ -56,7 +54,8 @@ int		main(int argc, char **argv)
 		return (1);
 	if (!init_stack(argv + 1, &stack_a))
 		return (print_error());
-	operations = choose_algorithm(stack_a, stack_b, operations);
+	operations = choose_algorithm(&stack_a, &stack_b, operations);
 	print_operations(operations);
+
 	return (0);
 }
