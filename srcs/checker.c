@@ -40,13 +40,8 @@ int			main(int argc, char **argv)
 		return (print_error());
 	while (get_next_line(0, &line) && *line != '\0')
 	{
-		printf("line is : %s\n", line);
 		if (!exec_operation(line, &stack_a, &stack_b))
 			return (print_error());
-		printf("Stack A:\n");
-		print_stack(stack_a);
-		printf("Stack B:\n");
-		print_stack(stack_b);
 		ft_strdel(&line);
 	}
 	if (!check_order(stack_a) || !check_empty(stack_b))

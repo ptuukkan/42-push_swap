@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 
 # include "libft.h"
+# include <stdio.h>
 
 int		init_stack(char **argv, t_list **stack_a);
 void	swap(t_list **stack);
@@ -30,5 +31,6 @@ int		print_error(void);
 void	sort_selection(t_list *stack_a, t_list *stack_b, t_list **operations, size_t n);
 void	print_operations(t_list *operations);
 void	print_stack(t_list *stack);
+void	sort_quick(t_list *stack_a, t_list *stack_b, t_list **operations, size_t n);
 
 #endif
