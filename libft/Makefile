@@ -16,7 +16,7 @@ SRCDIR = srcs
 
 SRCS = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c \
 		ft_isascii.c ft_isdigit.c ft_isprint.c ft_itoa.c \
-		ft_lstadd.c ft_lstapp.c ft_lstcapitalize.c ft_lstchr.c ft_lstdel.c \
+		ft_lstadd.c ft_lstapp.c ft_lstcapitalize.c ft_lstchr.c ft_lstcount.c ft_lstdel.c \
 		ft_lstdelone.c ft_lstfold.c ft_lstfree.c ft_lstiter.c ft_lstjoin.c \
 		ft_lstsize.c ft_lstmap.c ft_lstnew.c ft_lstpop.c ft_lstprint.c \
 		ft_lsttolower.c ft_lsttoupper.c ft_memalloc.c \

@@ -13,6 +13,8 @@
 
 #include "push_swap.h"
 
+/*
+
 void	sort_selection(t_list *stack_a, t_list *stack_b, t_list **operations, size_t n)
 {
 	size_t	i;
@@ -45,3 +47,6 @@ void	sort_selection(t_list *stack_a, t_list *stack_b, t_list **operations, size_
 		ft_lstapp(operations, ft_lstnew("pa", 3));
 	}
 }
+
+
+*/

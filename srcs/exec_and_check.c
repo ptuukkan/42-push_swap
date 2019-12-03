@@ -41,30 +41,30 @@ int	check_empty(t_list *stack)
 	return (0);
 }
 
-int	exec_operation(char *instruction, t_list **stack_a, t_list **stack_b)
+int	exec_operation(char *instruction, t_stacks *stacks)
 {
 	if (ft_strequ(instruction, "sa"))
-		swap(stack_a);
+		swap(stacks, 'a', 0);
 	else if (ft_strequ(instruction, "sb"))
-		swap(stack_b);
+		swap(stacks, 'b', 0);
 	else if (ft_strequ(instruction, "ss"))
-		swap_ab(stack_a, stack_b);
+		swap_ab(stacks);
 	else if (ft_strequ(instruction, "pa"))
-		push(stack_b, stack_a);
+		push(stacks, 'a');
 	else if (ft_strequ(instruction, "pb"))
-		push(stack_a, stack_b);
+		push(stacks, 'b');
 	else if (ft_strequ(instruction, "ra"))
-		rotate(stack_a);
+		rotate(stacks, 'a', 0);
 	else if (ft_strequ(instruction, "rb"))
-		rotate(stack_b);
+		rotate(stacks, 'b', 0);
 	else if (ft_strequ(instruction, "rr"))
-		rotate_ab(stack_a, stack_b);
+		rotate_ab(stacks);
 	else if (ft_strequ(instruction, "rra"))
-		reverse_rotate(stack_a);
+		reverse_rotate(stacks, 'a', 0);
 	else if (ft_strequ(instruction, "rrb"))
-		reverse_rotate(stack_b);
+		reverse_rotate(stacks, 'b', 0);
 	else if (ft_strequ(instruction, "rrr"))
-		reverse_rotate_ab(stack_a, stack_b);
+		reverse_rotate_ab(stacks);
 	else
 		return (0);
 	return (1);

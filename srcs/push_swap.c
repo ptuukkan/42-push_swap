@@ -13,6 +13,7 @@
 #include "push_swap.h"
 #include <stdio.h>
 
+
 void	print_operations(t_list *operations)
 {
 	while (operations)
@@ -34,28 +35,28 @@ void		print_stack(t_list *stack)
 	}
 }
 
-t_list	*choose_algorithm(t_list **stack_a, t_list **stack_b, t_list *operations)
+void	choose_algorithm(t_stacks *stacks)
 {
 
-	sort_quick(stack_a, stack_b, &operations);
-	return (operations);
+	sort_quick(stacks);
+	
 }
 
 int		main(int argc, char **argv)
 {
-	t_list	*stack_a;
-	t_list	*stack_b;
-	t_list	*operations;
+	t_stacks	stacks;
 
-	stack_a = NULL;
-	stack_b = NULL;
-	operations = NULL;
+	stacks.a = NULL;
+	stacks.b = NULL;
+	stacks.oplist = NULL;
 	if (argc == 1)
 		return (1);
-	if (!init_stack(argv + 1, &stack_a))
+	if (!init_stack(argv + 1, &stacks.a))
 		return (print_error());
-	operations = choose_algorithm(&stack_a, &stack_b, operations);
-	print_operations(operations);
+	choose_algorithm(&stacks);
+	int ops = ft_lstcount(stacks.oplist);
+	printf("Number of operations: %d\n", ops);
+
 
 	return (0);
 }

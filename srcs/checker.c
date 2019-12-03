@@ -28,23 +28,23 @@ void		print_stack(t_list *stack)
 
 int			main(int argc, char **argv)
 {
-	char	*line;
-	t_list	*stack_a;
-	t_list	*stack_b;
+	char		*line;
+	t_stacks	stacks;
 
-	stack_a = NULL;
-	stack_b = NULL;
+	stacks.a = NULL;
+	stacks.b = NULL;
+	stacks.oplist = NULL;
 	if (argc == 1)
 		return (1);
-	if (!init_stack(argv + 1, &stack_a))
+	if (!init_stack(argv + 1, &stacks.a))
 		return (print_error());
 	while (get_next_line(0, &line) && *line != '\0')
 	{
-		if (!exec_operation(line, &stack_a, &stack_b))
+		if (!exec_operation(line, &stacks))
 			return (print_error());
 		ft_strdel(&line);
 	}
-	if (!check_order(stack_a) || !check_empty(stack_b))
+	if (!check_order(stacks.a) || !check_empty(stacks.b))
 	{
 		ft_putstr("KO\n");
 		return (0);

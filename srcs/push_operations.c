@@ -12,14 +12,28 @@
 
 #include "push_swap.h"
 
-void	push(t_list **stack_from, t_list **stack_to)
+void	push(t_stacks *stacks, char stackchar)
 {
 	t_list	*temp;
 
-	if (stack_from == NULL)
-		return ;
-	temp = (*stack_from)->next;
-	(*stack_from)->next = *stack_to;
-	*stack_to = *stack_from;
-	*stack_from = temp;
+	if (stackchar == 'a')
+	{
+		if (stacks->b == NULL)
+			return;
+		temp = stacks->b->next;
+		stacks->b->next = stacks->a;
+		stacks->a = stacks->b;
+		stacks->b = temp;
+		ft_lstapp(&stacks->oplist, ft_lstnew("pa", 3));
+	}
+	else if (stackchar == 'b')
+	{
+		if (stacks->a == NULL)
+			return;
+		temp = stacks->a->next;
+		stacks->a->next = stacks->b;
+		stacks->b = stacks->a;
+		stacks->a = temp;
+		ft_lstapp(&stacks->oplist, ft_lstnew("pb", 3));
+	}
 }

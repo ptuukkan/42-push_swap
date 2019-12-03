@@ -15,7 +15,7 @@ NAME = push_swap
 LIB = libft.a
 SRCDIR = srcs
 SRCS = exec_and_check.c init_stack.c push_operations.c rotate_operations.c \
-		swap_operations.c sort_selection.c sort_quick.c
+		swap_operations.c sort_selection.c sort_quick.c array_quicksort.c
 
 OBJDIR = objects
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
@@ -25,7 +25,7 @@ GCC = gcc -Werror -Wextra -Wall -g
 
 all: $(NAME) $(CHECKER)
 
-$(NAME): $(OBJS) objects/push_swap.o libft/$(LIB)
+$(NAME): $(OBJS) objects/push_swap.o libft/$(LIB) buildlib
 	$(GCC) $(OBJS) objects/push_swap.o -o $(NAME) libft/$(LIB)
 
 $(CHECKER): $(OBJS) objects/checker.o libft/$(LIB)
@@ -35,7 +35,9 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c $(INC)/push_swap.h
 	@[ -d $(@D) ] || mkdir -p $(@D)
 	$(GCC) -c $< -o $@ -I $(INC) -I libft/$(INC)
 
-libft/$(LIB):
+libft/$(LIB): buildlib
+
+buildlib:
 	make -C libft/
 
 clean:
@@ -50,4 +52,4 @@ fclean : clean
 
 re: fclean all
 
-.PHONY: clean fclean all
+.PHONY: clean fclean all buildlib

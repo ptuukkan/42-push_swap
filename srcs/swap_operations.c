@@ -13,11 +13,24 @@
 #include "push_swap.h"
 
 
-void	swap(t_list **stack)
+void	swap(t_stacks *stacks, char stackchar, int both)
 {
 	t_list	*temp;
+	t_list	**stack;
 
-	if (stack == NULL)
+	if (stackchar == 'a')
+	{
+		stack = &stacks->a;
+		if (both == 0)
+			ft_lstapp(&stacks->oplist, ft_lstnew("sa", 3));
+	}
+	else if (stackchar == 'b')
+	{
+		stack = &stacks->b;
+		if (both == 0)
+			ft_lstapp(&stacks->oplist, ft_lstnew("sb", 3));
+	}
+	if (*stack == NULL)
 		return ;
 	if ((*stack)->next == NULL)
 		return ;
@@ -27,8 +40,9 @@ void	swap(t_list **stack)
 	*stack =  temp;
 }
 
-void	swap_ab(t_list **stack_a, t_list **stack_b)
+void	swap_ab(t_stacks *stacks)
 {
-	swap(stack_a);
-	swap(stack_b);
+	ft_lstapp(&stacks->oplist, ft_lstnew("ss", 3));
+	swap(stacks, 'a', 1);
+	swap(stacks, 'b', 1);
 }
