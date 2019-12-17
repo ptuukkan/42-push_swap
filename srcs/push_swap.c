@@ -39,7 +39,7 @@ void	choose_algorithm(t_stacks *stacks)
 {
 
 	sort_quick(stacks);
-	
+
 }
 
 int		main(int argc, char **argv)
@@ -54,8 +54,7 @@ int		main(int argc, char **argv)
 	if (!init_stack(argv + 1, &stacks.a))
 		return (print_error());
 	choose_algorithm(&stacks);
-	int ops = ft_lstcount(stacks.oplist);
-	printf("Number of operations: %d\n", ops);
+	print_operations(stacks.oplist);
 
 
 	return (0);
