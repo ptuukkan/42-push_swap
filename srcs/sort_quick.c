@@ -86,75 +86,55 @@ static int		get_median(t_list *stack, int size)
 
 static int		get_next_over(t_list *stack, int pivot, int size)
 {
+	int	first;
+	int	last;
 	int	i;
-	int	i2;
-	int	j;
 
-	i = 0;
-	i2 = 0;
-	j = 1;
+	first = 0;
+	i = 1;
 	while (stack)
 	{
 		if (*(int *)stack->content > pivot)
 		{
-			i = j;
-			break ;
+			if (first == 0)
+				first = i;
+			last = i;
 		}
 		stack = stack->next;
-		j++;
+		i++;
 	}
-	if (i > (size / 5 * 2))
-	{
-		while (stack)
-		{
-			if (*(int *)stack->content > pivot)
-				i2 = j;
-			stack = stack->next;
-			j++;
-		}
-		if (size - i2 < i)
-			return (i2);
-	}
-	return (i);
+	if (first <= (size - last))
+		return (first);
+	return (last);
 }
 
 static int		get_next_under(t_list *stack, int pivot, int size)
 {
+	int	first;
+	int	last;
 	int	i;
-	int	i2;
-	int	j;
 
-	i = 0;
-	i2 = 0;
-	j = 1;
+	first = 0;
+	i = 1;
 	while (stack)
 	{
 		if (*(int *)stack->content < pivot)
 		{
-			i = j;
-			break ;
+			if (first == 0)
+				first = i;
+			last = i;
 		}
 		stack = stack->next;
-		j++;
+		i++;
 	}
-	if (i > (size / 5 * 2))
-	{
-		while (stack)
-		{
-			if (*(int *)stack->content < pivot)
-				i2 = j;
-			stack = stack->next;
-			j++;
-		}
-		if (size - i2 < i)
-			return (i2);
-	}
-	return (i);
+	if (first <= (size - last))
+		return (first);
+	return (last);
 }
 
-int		check_sorted(t_list *stack, int sortdir)
+int		check_sorted(t_list *stack, int reverse)
 {
-	if (sortdir == 1)
+	if (reverse == 0)
 	{
 		while (stack->next)
 		{
@@ -186,7 +166,7 @@ int	push_under_pivot(t_stacks *stacks)
 	i = 0;
 	if (stacks->a == NULL)
 		return (0);
-	if (check_sorted(stacks->a, 1) == 1)
+	if (check_sorted(stacks->a, 0) == 1)
 		return (-1);
 	size = ft_lstcount(stacks->a);
 	pivot = get_median(stacks->a, size);
@@ -216,7 +196,7 @@ int	push_over_pivot(t_stacks *stacks)
 	i = 0;
 	if (stacks->b == NULL)
 		return (0);
-	if (check_sorted(stacks->b, -1) == 1)
+	if (check_sorted(stacks->b, 1) == 1)
 		return (-1);
 	size = ft_lstcount(stacks->b);
 	pivot = get_median(stacks->b, size);

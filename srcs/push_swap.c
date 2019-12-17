@@ -45,6 +45,7 @@ void	choose_algorithm(t_stacks *stacks)
 int		main(int argc, char **argv)
 {
 	t_stacks	stacks;
+	int			size;
 
 	stacks.a = NULL;
 	stacks.b = NULL;
@@ -53,9 +54,11 @@ int		main(int argc, char **argv)
 		return (1);
 	if (!init_stack(argv + 1, &stacks.a))
 		return (print_error());
-	choose_algorithm(&stacks);
+	size = ft_lstcount(stacks.a);
+	if (size <= 3)
+		sort_small(&stacks);
+	else
+		sort_big(&stacks);
 	print_operations(stacks.oplist);
-
-
 	return (0);
 }
