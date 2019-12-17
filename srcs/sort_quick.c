@@ -190,7 +190,7 @@ int	push_under_pivot(t_stacks *stacks)
 		return (-1);
 	size = ft_lstcount(stacks->a);
 	pivot = get_median(stacks->a, size);
-	while (size > 2 && (nextnb = get_next_under(stacks->a, pivot, size)) > 0)
+	while ((nextnb = get_next_under(stacks->a, pivot, size)) > 0)
 	{
 		while (*(int *)stacks->a->content > pivot)
 		{
@@ -289,8 +289,11 @@ void	stack_quicksort(t_stacks *stacks, int chunk, int size)
 
 void	sort_quick(t_stacks *stacks)
 {
+	int	chunk;
 
-	stack_quicksort(stacks, push_under_pivot(stacks), ft_lstcount(stacks->a));
+	chunk = push_under_pivot(stacks);
+	if (chunk > 0)
+		stack_quicksort(stacks, chunk, ft_lstcount(stacks->a));
 
 }
 
