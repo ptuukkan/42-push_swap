@@ -35,11 +35,37 @@ void		print_stack(t_list *stack)
 	}
 }
 
-void	choose_algorithm(t_stacks *stacks)
+void	sort_3(t_stacks *stacks, int a, int b, int c)
 {
+	if (a < b && a < c && b > c)
+	{
+		reverse_rotate(stacks, 'a', 0);
+		swap(stacks, 'a', 0);
+	}
+	else if (a > b && a < c && b < c)
+		swap(stacks, 'a', 0);
+	else if (a < b && a > c && b > c)
+		reverse_rotate(stacks, 'a', 0);
+	else if (a > b && a > c && b < c)
+		rotate(stacks, 'a', 0);
+	else if (a > b && a > c && b > c)
+	{
+		rotate(stacks, 'a', 0);
+		swap(stacks, 'a', 0);
+	}
+}
 
-	sort_quick(stacks);
-
+void	sort_small(t_stacks *stacks, int size)
+{
+	if (size == 3)
+		sort_3(stacks, *(int *)stacks->a->content,\
+		*(int *)stacks->a->next->content,\
+		*(int *)stacks->a->next->next->content);
+	else if (size == 2)
+	{
+		if (*(int *)stacks->a->content > *(int *)stacks->a->next->content)
+			swap(stacks, 'a', 0);
+	}
 }
 
 int		main(int argc, char **argv)
@@ -54,11 +80,13 @@ int		main(int argc, char **argv)
 		return (1);
 	if (!init_stack(argv + 1, &stacks.a))
 		return (print_error());
+	if (check_order(stacks.a))
+		return (0);
 	size = ft_lstcount(stacks.a);
 	if (size <= 3)
-		sort_small(&stacks);
+		sort_small(&stacks, size);
 	else
-		sort_big(&stacks);
+		sort_quick(&stacks, 0);
 	print_operations(stacks.oplist);
 	return (0);
 }

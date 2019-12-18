@@ -166,8 +166,8 @@ int	push_under_pivot(t_stacks *stacks)
 	i = 0;
 	if (stacks->a == NULL)
 		return (0);
-	if (check_sorted(stacks->a, 0) == 1)
-		return (-1);
+//	if (check_sorted(stacks->a, 0) == 1)
+//		return (-1);
 	size = ft_lstcount(stacks->a);
 	pivot = get_median(stacks->a, size);
 	while ((nextnb = get_next_under(stacks->a, pivot, size)) > 0)
@@ -196,8 +196,8 @@ int	push_over_pivot(t_stacks *stacks)
 	i = 0;
 	if (stacks->b == NULL)
 		return (0);
-	if (check_sorted(stacks->b, 1) == 1)
-		return (-1);
+//	if (check_sorted(stacks->b, 1) == 1)
+//		return (-1);
 	size = ft_lstcount(stacks->b);
 	pivot = get_median(stacks->b, size);
 	while ((nextnb = get_next_over(stacks->b, pivot, size)) > 0)
@@ -239,6 +239,11 @@ void	stack_quicksort(t_stacks *stacks, int chunk, int size)
 {
 	int	i;
 
+	printf("chunk: %d\nSize: %d\n", chunk, size);
+	printf("Stack A\n");
+	print_stack(stacks->a);
+	printf("Stack B\n");
+	print_stack(stacks->b);
 	if (size < 3)
 	{
 		swap_stack(stacks, 'b');
@@ -257,6 +262,11 @@ void	stack_quicksort(t_stacks *stacks, int chunk, int size)
 		return ;
 	}
 	stack_quicksort(stacks, push_over_pivot(stacks), ft_lstcount(stacks->b));
+		printf("chunk: %d\nSize: %d\n", chunk, size);
+	printf("Stack A\n");
+	print_stack(stacks->a);
+	printf("Stack B\n");
+	print_stack(stacks->b);
 	if (size + chunk == ft_lstcount(stacks->a))
 		i = size;
 	else
@@ -264,16 +274,133 @@ void	stack_quicksort(t_stacks *stacks, int chunk, int size)
 	while (i-- > 0)
 		push(stacks, 'b');
 	stack_quicksort(stacks, push_over_pivot(stacks), ft_lstcount(stacks->b));
+		printf("chunk: %d\nSize: %d\n", chunk, size);
+	printf("Stack A\n");
+	print_stack(stacks->a);
+	printf("Stack B\n");
+	print_stack(stacks->b);
 }
 
-
-void	sort_quick(t_stacks *stacks)
+void	sort_quick_3(t_stacks *stacks, int a, int b, int c)
 {
-	int	chunk;
+	if (a > b && a > c && b > c)
+	{
+		push(stacks, 'a');
+		push(stacks, 'a');
+		push(stacks, 'a');
+		rotate(stacks, 'a', 0);
+		rotate(stacks, 'a', 0);
+		rotate(stacks, 'a', 0);
+	}
+	else if (a > b && a < c && b < c)
+	{
+		push(stacks, 'a');
+		push(stacks, 'a');
+		rotate(stacks, 'a', 0);
+		push(stacks, 'a');
+		rotate(stacks, 'a', 0);
+		rotate(stacks, 'a', 0);
+	}
+	else if (a < b && a > c && b > c)
+	{
+		swap(stacks, 'b', 0);
+		push(stacks, 'a');
+		push(stacks, 'a');
+		push(stacks, 'a');
+		rotate(stacks, 'a', 0);
+		rotate(stacks, 'a', 0);
+		rotate(stacks, 'a', 0);
+	}
+	else if (a > b && a < c && b < c)
+	{
+		push(stacks, 'a');
+		push(stacks, 'a');
+		rotate(stacks, 'a', 0);
+		push(stacks, 'a');
+		swap(stacks, 'a', 0);
+		rotate(stacks, 'a', 0);
+		rotate(stacks, 'a', 0);
+	}
+	else if (a < b && a < c && b > c)
+	{
+		push(stacks, 'a');
+		rotate(stacks, 'a', 0);
+		push(stacks, 'a');
+		push(stacks, 'a');
+		rotate(stacks, 'a', 0);
+		rotate(stacks, 'a', 0);
+	}
+	else if (a < b && a < c && b < c)
+	{
+		push(stacks, 'a');
+		rotate(stacks, 'a', 0);
+		push(stacks, 'a');
+		rotate(stacks, 'a', 0);
+		push(stacks, 'a');
+		rotate(stacks, 'a', 0);
+	}
+}
 
+void	sort_quick_finish(t_stacks *stacks, int size)
+{
+	if (size == 1)
+	{
+		push(stacks, 'a');
+		rotate(stacks, 'a', 0);
+	}
+	else if (size == 2)
+	{
+		if (*(int *)stacks->b->content > *(int *)stacks->b->next->content)
+		{
+			push(stacks, 'a');
+			push(stacks, 'a');
+			rotate(stacks, 'a', 0);
+		}
+		else
+		{
+			push(stacks, 'a');
+			rotate(stacks, 'a', 0);
+			push(stacks, 'a');
+		}
+		rotate(stacks, 'a', 0);
+	}
+	else
+		sort_quick_3(stacks, *(int *)stacks->b->content,\
+		*(int *)stacks->b->next->content,\
+		*(int *)stacks->b->next->next->content);
+}
+
+int	sort_quick(t_stacks *stacks, int chunk)
+{
+
+	printf("chunk: %d\n", chunk);
+	printf("Stack A\n");
+	print_stack(stacks->a);
+	printf("Stack B\n");
+	print_stack(stacks->b);
+
+	if (stacks->b != NULL && ft_lstcount(stacks->b) <= 3)
+	{
+		sort_quick_finish(stacks, ft_lstcount(stacks->b));
+		return (chunk);
+	}
+	if (chunk == 0)
+		sort_quick(stacks, push_under_pivot(stacks));
+	else
+	{
+		chunk = sort_quick(stacks, push_over_pivot(stacks));
+		while ()
+			printf("chunk: %d\n", chunk);
+	printf("Stack A\n");
+	print_stack(stacks->a);
+	printf("Stack B\n");
+	print_stack(stacks->b);
+	}
+	return (0);
+	/*
 	chunk = push_under_pivot(stacks);
 	if (chunk > 0)
 		stack_quicksort(stacks, chunk, ft_lstcount(stacks->a));
-
+	*/
 }
 

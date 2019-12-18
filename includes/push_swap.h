@@ -38,8 +38,9 @@ int		print_error(void);
 void	sort_selection(t_list *stack_a, t_list *stack_b, t_list **operations, size_t n);
 void	print_operations(t_list *operations);
 void	print_stack(t_list *stack);
-void	sort_quick(t_stacks *stacks);
+int		sort_quick(t_stacks *stacks, int chunk);
 int		ft_lstcount(t_list *lst);
 int		*array_quicksort(t_list *lst, int size);
+void	sort_small(t_stacks *stacks, int size);
 
 #endif
