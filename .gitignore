@@ -3,3 +3,5 @@ push_swap
 libft/libft.a
 libft/objects/
 objects/
+.vscode/launch.json
+.vscode/tasks.json

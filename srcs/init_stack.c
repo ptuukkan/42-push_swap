@@ -31,6 +31,8 @@ static int	check_duplicate(t_list *stack_a, int nb)
 
 static int	check_digits(char *str)
 {
+	if (*str == '-')
+		str++;
 	while(*str != '\0')
 	{
 		if (ft_isdigit(*str) == 0)

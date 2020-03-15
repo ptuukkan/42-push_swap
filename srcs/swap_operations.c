@@ -24,7 +24,7 @@ void	swap(t_stacks *stacks, char stackchar, int both)
 		if (both == 0)
 			ft_lstapp(&stacks->oplist, ft_lstnew("sa", 3));
 	}
-	else if (stackchar == 'b')
+	else
 	{
 		stack = &stacks->b;
 		if (both == 0)

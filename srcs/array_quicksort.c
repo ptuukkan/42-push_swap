@@ -61,11 +61,7 @@ void	ft_quicksort(int *array, int size)
 		while (end >= 0 && array[end] > pivot)
 			end--;
 		if (begin < end)
-		{
-			ft_swap(&array[begin], &array[end]);
-			begin++;
-			end--;
-		}
+			ft_swap(&array[begin++], &array[end--]);
 	}
 	ft_quicksort(array, end + 1);
 	ft_quicksort(array + begin, size - begin);

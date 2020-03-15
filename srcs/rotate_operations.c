@@ -23,7 +23,7 @@ void	rotate(t_stacks *stacks, char stackchar, int both)
 		if (both == 0)
 			ft_lstapp(&stacks->oplist, ft_lstnew("ra", 3));
 	}
-	else if (stackchar == 'b')
+	else
 	{
 		stack = &stacks->b;
 		if (both == 0)
@@ -50,7 +50,7 @@ void	reverse_rotate(t_stacks *stacks, char stackchar, int both)
 		if (both == 0)
 			ft_lstapp(&stacks->oplist, ft_lstnew("rra", 3));
 	}
-	else if (stackchar == 'b')
+	else
 	{
 		stack = &stacks->b;
 		if (both == 0)
