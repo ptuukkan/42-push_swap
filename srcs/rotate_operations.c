@@ -12,70 +12,38 @@
 
 #include "push_swap.h"
 
-void	rotate(t_stacks *stacks, char stackchar, int both)
+void	rotate_a(t_stacks *stacks)
 {
 	t_list	*temp;
-	t_list	**stack;
 
-	if (stackchar == 'a')
-	{
-		stack = &stacks->a;
-		if (both == 0)
-			ft_lstapp(&stacks->oplist, ft_lstnew("ra", 3));
-	}
-	else
-	{
-		stack = &stacks->b;
-		if (both == 0)
-			ft_lstapp(&stacks->oplist, ft_lstnew("rb", 3));
-	}
-	if (*stack == NULL || (*stack)->next == NULL)
+	if (stacks->a == NULL || stacks->a->next == NULL)
 		return ;
-	temp = *stack;
+	temp = stacks->a;
 	while (temp->next != NULL)
 		temp = temp->next;
-	temp->next = *stack;
-	*stack = (*stack)->next;
+	temp->next = stacks->a;
+	stacks->a = stacks->a->next;
 	temp->next->next = NULL;
+	ft_lstapp(&stacks->oplist, ft_lstnew("ra\n", 4));
 }
 
-void	reverse_rotate(t_stacks *stacks, char stackchar, int both)
+void	rotate_b(t_stacks *stacks)
 {
 	t_list	*temp;
-	t_list	**stack;
 
-	if (stackchar == 'a')
-	{
-		stack = &stacks->a;
-		if (both == 0)
-			ft_lstapp(&stacks->oplist, ft_lstnew("rra", 3));
-	}
-	else
-	{
-		stack = &stacks->b;
-		if (both == 0)
-			ft_lstapp(&stacks->oplist, ft_lstnew("rrb", 3));
-	}
-	if (*stack == NULL || (*stack)->next == NULL)
+	if (stacks->b == NULL || stacks->b->next == NULL)
 		return ;
-	temp = *stack;
-	while (temp->next->next != NULL)
+	temp = stacks->b;
+	while (temp->next != NULL)
 		temp = temp->next;
-	temp->next->next = *stack;
-	*stack = temp->next;
-	temp->next = NULL;
+	temp->next = stacks->b;
+	stacks->b = stacks->b->next;
+	temp->next->next = NULL;
+	ft_lstapp(&stacks->oplist, ft_lstnew("rb\n", 4));
 }
 
 void	rotate_ab(t_stacks *stacks)
 {
-	ft_lstapp(&stacks->oplist, ft_lstnew("rr", 3));
-	rotate(stacks, 'a', 1);
-	rotate(stacks, 'b', 1);
-}
-
-void	reverse_rotate_ab(t_stacks *stacks)
-{
-	ft_lstapp(&stacks->oplist, ft_lstnew("rrr", 4));
-	reverse_rotate(stacks, 'a', 1);
-	reverse_rotate(stacks, 'b', 1);
+	rotate_a(stacks);
+	rotate_b(stacks);
 }

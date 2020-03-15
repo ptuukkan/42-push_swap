@@ -56,7 +56,6 @@ static int	check_multiple(char *str)
 	return (i);
 }
 
-
 int			init_stack(char **argv, t_list **stack_a)
 {
 	long long	lnb;

@@ -18,7 +18,7 @@ void	print_operations(t_list *operations)
 {
 	while (operations)
 	{
-		ft_putendl((char *)operations->content);
+		ft_putstr((char *)operations->content);
 		operations = operations->next;
 	}
 }
@@ -35,43 +35,13 @@ void		print_stack(t_list *stack)
 	}
 }
 
-void	sort_3(t_stacks *stacks, int a, int b, int c)
-{
-	if (a < b && a < c && b > c)
-	{
-		reverse_rotate(stacks, 'a', 0);
-		swap(stacks, 'a', 0);
-	}
-	else if (a > b && a < c && b < c)
-		swap(stacks, 'a', 0);
-	else if (a < b && a > c && b > c)
-		reverse_rotate(stacks, 'a', 0);
-	else if (a > b && a > c && b < c)
-		rotate(stacks, 'a', 0);
-	else if (a > b && a > c && b > c)
-	{
-		rotate(stacks, 'a', 0);
-		swap(stacks, 'a', 0);
-	}
-}
 
-void	sort_small(t_stacks *stacks, int size)
-{
-	if (size == 3)
-		sort_3(stacks, *(int *)stacks->a->content,\
-		*(int *)stacks->a->next->content,\
-		*(int *)stacks->a->next->next->content);
-	else if (size == 2)
-	{
-		if (*(int *)stacks->a->content > *(int *)stacks->a->next->content)
-			swap(stacks, 'a', 0);
-	}
-}
 
 int		main(int argc, char **argv)
 {
 	t_stacks	stacks;
 	int			size;
+	char		*op;
 
 	stacks.a = NULL;
 	stacks.b = NULL;
@@ -84,9 +54,10 @@ int		main(int argc, char **argv)
 		return (0);
 	size = ft_lstcount(stacks.a);
 	if (size <= 3)
-		sort_small(&stacks, size);
+		sort_small_a(&stacks, size);
 	else
-		sort_quick(&stacks, 0);
-	print_operations(stacks.oplist);
+		sort_stack(&stacks);
+	op = optimize(stacks.oplist);
+	ft_putstr(op);
 	return (0);
 }

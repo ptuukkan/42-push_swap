@@ -102,5 +102,6 @@ size_t				ft_lstsize(t_list *lst);
 void				ft_lstfree(void *content, size_t content_size);
 t_list				*ft_lstchr(t_list *lst, int c);
 int					get_next_line(const int fd, char **line);
+char				*ft_strreplace(char *search, char *replace, char **subject);
 
 #endif

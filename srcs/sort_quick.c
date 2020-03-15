@@ -73,7 +73,7 @@ static int		get_location(t_list *stack, int nb)
 	return (i);
 }
 */
-static int		get_median(t_list *stack, int size)
+int		get_median(t_list *stack, int size)
 {
 	int	*array;
 	int	median;
@@ -84,7 +84,7 @@ static int		get_median(t_list *stack, int size)
 	return (median);
 }
 
-static int		get_next_over(t_list *stack, int pivot, int size)
+int		get_next_over(t_list *stack, int pivot, int size)
 {
 	int	first;
 	int	last;
@@ -108,7 +108,7 @@ static int		get_next_over(t_list *stack, int pivot, int size)
 	return (last);
 }
 
-static int		get_next_under(t_list *stack, int pivot, int size)
+int		get_next_under(t_list *stack, int pivot, int size)
 {
 	int	first;
 	int	last;

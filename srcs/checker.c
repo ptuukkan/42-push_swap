@@ -44,7 +44,7 @@ int			main(int argc, char **argv)
 			return (print_error());
 		ft_strdel(&line);
 	}
-	if (!check_order(stacks.a) || !check_empty(stacks.b))
+	if (!check_order(stacks.a) || stacks.b != NULL)
 	{
 		ft_putstr("KO\n");
 		return (0);

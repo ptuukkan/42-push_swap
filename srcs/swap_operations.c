@@ -12,37 +12,34 @@
 
 #include "push_swap.h"
 
-
-void	swap(t_stacks *stacks, char stackchar, int both)
+void	swap_a(t_stacks *stacks)
 {
 	t_list	*temp;
-	t_list	**stack;
 
-	if (stackchar == 'a')
-	{
-		stack = &stacks->a;
-		if (both == 0)
-			ft_lstapp(&stacks->oplist, ft_lstnew("sa", 3));
-	}
-	else
-	{
-		stack = &stacks->b;
-		if (both == 0)
-			ft_lstapp(&stacks->oplist, ft_lstnew("sb", 3));
-	}
-	if (*stack == NULL)
+	if (stacks->a == NULL || stacks->a->next == NULL)
 		return ;
-	if ((*stack)->next == NULL)
+	temp = stacks->a->next;
+	stacks->a->next = temp->next;
+	temp->next = stacks->a;
+	stacks->a =  temp;
+	ft_lstapp(&stacks->oplist, ft_lstnew("sa\n", 4));
+}
+
+void	swap_b(t_stacks *stacks)
+{
+	t_list	*temp;
+
+	if (stacks->b == NULL || stacks->b->next == NULL)
 		return ;
-	temp = (*stack)->next;
-	(*stack)->next = temp->next;
-	temp->next = *stack;
-	*stack =  temp;
+	temp = stacks->b->next;
+	stacks->b->next = temp->next;
+	temp->next = stacks->b;
+	stacks->b =  temp;
+	ft_lstapp(&stacks->oplist, ft_lstnew("sb\n", 4));
 }
 
 void	swap_ab(t_stacks *stacks)
 {
-	ft_lstapp(&stacks->oplist, ft_lstnew("ss", 3));
-	swap(stacks, 'a', 1);
-	swap(stacks, 'b', 1);
+	swap_a(stacks);
+	swap_b(stacks);
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_operations.c                                  :+:      :+:    :+:   */
+/*   reverse_rotate_operations.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ptuukkan <ptuukkan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,28 +12,38 @@
 
 #include "push_swap.h"
 
-void	push_a(t_stacks *stacks)
+void	reverse_rotate_a(t_stacks *stacks)
 {
 	t_list	*temp;
 
-	if (stacks->b == NULL)
-		return;
-	temp = stacks->b->next;
-	stacks->b->next = stacks->a;
-	stacks->a = stacks->b;
-	stacks->b = temp;
-	ft_lstapp(&stacks->oplist, ft_lstnew("pa\n", 4));
+	if (stacks->a == NULL || stacks->a->next == NULL)
+		return ;
+	temp = stacks->a;
+	while (temp->next->next != NULL)
+		temp = temp->next;
+	temp->next->next = stacks->a;
+	stacks->a = temp->next;
+	temp->next = NULL;
+	ft_lstapp(&stacks->oplist, ft_lstnew("rra\n", 5));
 }
 
-void	push_b(t_stacks *stacks)
+void	reverse_rotate_b(t_stacks *stacks)
 {
 	t_list	*temp;
 
-	if (stacks->a == NULL)
-		return;
-	temp = stacks->a->next;
-	stacks->a->next = stacks->b;
-	stacks->b = stacks->a;
-	stacks->a = temp;
-	ft_lstapp(&stacks->oplist, ft_lstnew("pb\n", 4));
+	if (stacks->b == NULL || stacks->b->next == NULL)
+		return ;
+	temp = stacks->b;
+	while (temp->next->next != NULL)
+		temp = temp->next;
+	temp->next->next = stacks->b;
+	stacks->b = temp->next;
+	temp->next = NULL;
+	ft_lstapp(&stacks->oplist, ft_lstnew("rrb\n", 5));
+}
+
+void	reverse_rotate_ab(t_stacks *stacks)
+{
+	reverse_rotate_a(stacks);
+	reverse_rotate_b(stacks);
 }

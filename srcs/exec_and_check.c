@@ -34,38 +34,47 @@ int	check_order(t_list *stack)
 	return (1);
 }
 
-int	check_empty(t_list *stack)
+int	exec_operation(char *op, t_stacks *stacks)
 {
-	if (stack == NULL)
-		return (1);
-	return (0);
-}
-
-int	exec_operation(char *instruction, t_stacks *stacks)
-{
-	if (ft_strequ(instruction, "sa"))
-		swap(stacks, 'a', 0);
-	else if (ft_strequ(instruction, "sb"))
-		swap(stacks, 'b', 0);
-	else if (ft_strequ(instruction, "ss"))
+	if (ft_strequ(op, "sa"))
+		swap_a(stacks);
+	else if (ft_strequ(op, "sb"))
+		swap_b(stacks);
+	else if (ft_strequ(op, "ss"))
 		swap_ab(stacks);
-	else if (ft_strequ(instruction, "pa"))
-		push(stacks, 'a');
-	else if (ft_strequ(instruction, "pb"))
-		push(stacks, 'b');
-	else if (ft_strequ(instruction, "ra"))
-		rotate(stacks, 'a', 0);
-	else if (ft_strequ(instruction, "rb"))
-		rotate(stacks, 'b', 0);
-	else if (ft_strequ(instruction, "rr"))
+	else if (ft_strequ(op, "pa"))
+		push_a(stacks);
+	else if (ft_strequ(op, "pb"))
+		push_b(stacks);
+	else if (ft_strequ(op, "ra"))
+		rotate_a(stacks);
+	else if (ft_strequ(op, "rb"))
+		rotate_b(stacks);
+	else if (ft_strequ(op, "rr"))
 		rotate_ab(stacks);
-	else if (ft_strequ(instruction, "rra"))
-		reverse_rotate(stacks, 'a', 0);
-	else if (ft_strequ(instruction, "rrb"))
-		reverse_rotate(stacks, 'b', 0);
-	else if (ft_strequ(instruction, "rrr"))
+	else if (ft_strequ(op, "rra"))
+		reverse_rotate_a(stacks);
+	else if (ft_strequ(op, "rrb"))
+		reverse_rotate_b(stacks);
+	else if (ft_strequ(op, "rrr"))
 		reverse_rotate_ab(stacks);
 	else
 		return (0);
 	return (1);
+}
+
+void	exec_operations(t_stacks *stacks, char *ops)
+{
+	char	**split;
+	int		i;
+
+	if (!(split = ft_strsplit(ops, '\n')))
+		return ;
+	i = 0;
+	while (split[i] != NULL)
+		exec_operation(split[i++], stacks);
+	i--;
+	while (i >= 0)
+		ft_strdel(&split[i--]);
+	free(split);
 }

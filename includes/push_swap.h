@@ -16,6 +16,10 @@
 # include "libft.h"
 # include <stdio.h>
 
+# define FIRST(x) *(int *)x->content
+# define SECOND(x) *(int *)x->next->content
+# define THIRD(x) *(int *)x->next->next->content
+
 typedef struct		s_stacks
 {
 	t_list	*a;
@@ -23,13 +27,25 @@ typedef struct		s_stacks
 	t_list	*oplist;
 }					t_stacks;
 
+typedef struct		s_info
+{
+	int	s_a;
+	int	s_b;
+	int	p_a;
+	int	p_b;
+}					t_info;
+
 int		init_stack(char **argv, t_list **stack_a);
-void	swap(t_stacks *stacks, char stackchar, int both);
+void	swap_a(t_stacks *stacks);
+void	swap_b(t_stacks *stacks);
 void	swap_ab(t_stacks *stacks);
-void	push(t_stacks *stacks, char stackchar);
-void	rotate(t_stacks *stacks, char stackchar, int both);
+void	push_a(t_stacks *stacks);
+void	push_b(t_stacks *stacks);
+void	rotate_a(t_stacks *stacks);
+void	rotate_b(t_stacks *stacks);
 void	rotate_ab(t_stacks *stacks);
-void	reverse_rotate(t_stacks *stacks, char stackchar, int both);
+void	reverse_rotate_a(t_stacks *stacks);
+void	reverse_rotate_b(t_stacks *stacks);
 void	reverse_rotate_ab(t_stacks *stacks);
 int		check_order(t_list *stack);
 int		check_empty(t_list *stack);
@@ -41,6 +57,15 @@ void	print_stack(t_list *stack);
 int		sort_quick(t_stacks *stacks, int chunk);
 int		ft_lstcount(t_list *lst);
 int		*array_quicksort(t_list *lst, int size);
-void	sort_small(t_stacks *stacks, int size);
+int		get_median(t_list *stack, int size);
+int		get_next_over(t_list *stack, int pivot, int size);
+int		get_next_under(t_list *stack, int pivot, int size);
+int		push_under_pivot(t_stacks *stacks);
+int		push_over_pivot(t_stacks *stacks);
+void	sort_stack(t_stacks *stacks);
+char	*optimize(t_list *oplist);
+void	exec_operations(t_stacks *stacks, char *ops);
+void	sort_small_a(t_stacks *stacks, int size);
+void	sort_small_b(t_stacks *stacks, int size);
 
 #endif
