@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include <stdio.h>
+# include <stdint.h>
 
 # define FIRST(x) *(int *)x->content
 # define SECOND(x) *(int *)x->next->content
@@ -25,15 +26,8 @@ typedef struct		s_stacks
 	t_list	*a;
 	t_list	*b;
 	t_list	*oplist;
+	int		highest;
 }					t_stacks;
-
-typedef struct		s_info
-{
-	int	s_a;
-	int	s_b;
-	int	p_a;
-	int	p_b;
-}					t_info;
 
 int		init_stack(char **argv, t_list **stack_a);
 void	swap_a(t_stacks *stacks);
@@ -59,13 +53,14 @@ int		ft_lstcount(t_list *lst);
 int		*array_quicksort(t_list *lst, int size);
 int		get_median(t_list *stack, int size);
 int		get_next_over(t_list *stack, int pivot, int size);
-int		get_next_under(t_list *stack, int pivot, int size);
-int		push_under_pivot(t_stacks *stacks);
+int		get_next_under(t_list *stack, int pivot, int size, int highest);
+int		push_under_pivot(t_stacks *stacks, int size);
 int		push_over_pivot(t_stacks *stacks);
 void	sort_stack(t_stacks *stacks);
 char	*optimize(t_list *oplist);
 void	exec_operations(t_stacks *stacks, char *ops);
 void	sort_small_a(t_stacks *stacks, int size);
 void	sort_small_b(t_stacks *stacks, int size);
+void	print_stacks(t_stacks *stacks);
 
 #endif

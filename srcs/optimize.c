@@ -14,23 +14,34 @@
 
 int		optimizations_found(char **op)
 {
-	if (ft_strstr(*op, "pb\npa\n"))
+	if (ft_strstr(*op, "\npb\npa\n"))
 	{
-		*op = ft_strreplace("pb\npa\n", "", op);
+		*op = ft_strreplace("\npb\npa\n", "\n", op);
 		return (1);
 	}
-	else if (ft_strstr(*op, "sa\nsb\n"))
+	else if (ft_strstr(*op, "\nsa\nsb\n"))
 	{
-		*op = ft_strreplace("sa\nsb\n", "ss\n", op);
+		*op = ft_strreplace("\nsa\nsb\n", "\nss\n", op);
 		return (1);
 	}
-	else if (ft_strstr(*op, "sb\nsa\n"))
+	else if (ft_strstr(*op, "\nsb\nsa\n"))
 	{
-		*op = ft_strreplace("sb\nsa\n", "ss\n", op);
+		*op = ft_strreplace("\nsb\nsa\n", "\nss\n", op);
+		return (1);
+	}
+	else if (ft_strstr(*op, "\nra\nrb\n"))
+	{
+		*op = ft_strreplace("\nra\nrb\n", "\nrr\n", op);
+		return (1);
+	}
+	else if (ft_strstr(*op, "\nrra\nrrb\n"))
+	{
+		*op = ft_strreplace("\nrra\nrrb\n", "\nrrr\n", op);
 		return (1);
 	}
 	return (0);
 }
+
 
 char	*optimize(t_list *oplist)
 {
@@ -39,11 +50,12 @@ char	*optimize(t_list *oplist)
 
 	if (!(op = ft_lstfold(&oplist, &ft_lstjoin)))
 		exit(0);
+	return (op);
 	i = 0;
 	while (optimizations_found(&op))
 	{
 		i++;
 	}
-	//printf("Optimizations found: %d\n", i);
+	printf("Optimizations found: %d\n", i);
 	return (op);
 }

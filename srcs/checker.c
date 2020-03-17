@@ -12,6 +12,9 @@
 
 #include "push_swap.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
 
 
 void		print_stack(t_list *stack)
@@ -43,6 +46,8 @@ int			main(int argc, char **argv)
 		if (!exec_operation(line, &stacks))
 			return (print_error());
 		ft_strdel(&line);
+		sleep(1);
+		print_stacks(&stacks);
 	}
 	if (!check_order(stacks.a) || stacks.b != NULL)
 	{
