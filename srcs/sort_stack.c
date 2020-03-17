@@ -208,12 +208,12 @@ void	prepare_a(t_stacks *stacks, t_list *a, int pivot)
 
 	i = 0;
 	size = ft_lstcount(stacks->a);
-	while (FIRST(a) > pivot)
+	while (a && FIRST(a) > pivot)
 	{
 		a = a->next;
 		i++;
 	}
-	while (FIRST(a) < pivot)
+	while (a && FIRST(a) < pivot)
 	{
 		a = a->next;
 		i++;

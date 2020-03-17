@@ -58,6 +58,11 @@ static void	sort_3_b(t_stacks *stacks, int a, int b, int c)
 
 void	sort_small_b(t_stacks *stacks, int size)
 {
+	stacks->highest = FIRST(stacks->b);
+	if (stacks->b->next && SECOND(stacks->b) > stacks->highest)
+		stacks->highest = SECOND(stacks->b);
+	if (stacks->b->next && stacks->b->next->next && THIRD(stacks->b) > stacks->highest)
+		stacks->highest = THIRD(stacks->b);
 	if (size == 1)
 		exec_operations(stacks, "pa\nra\n");
 	else if (size == 2 && (FIRST(stacks->b) > SECOND(stacks->b)))
