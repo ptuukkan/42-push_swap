@@ -14,31 +14,28 @@
 
 void	rotate_a(t_stacks *stacks)
 {
-	t_list	*temp;
-
 	if (stacks->a == NULL || stacks->a->next == NULL)
 		return ;
-	temp = stacks->a;
-	while (temp->next != NULL)
-		temp = temp->next;
-	temp->next = stacks->a;
+	stacks->a->end = 1;
+	stacks->a->prev->end = 0;
 	stacks->a = stacks->a->next;
-	temp->next->next = NULL;
 	ft_lstapp(&stacks->oplist, ft_lstnew("ra\n", 4));
+}
+
+void	rotate_a_sorted(t_stacks *stacks)
+{
+	if (FIRST(stacks->a) > stacks->highest)
+		stacks->highest = FIRST(stacks->a);
+	rotate_a(stacks);
 }
 
 void	rotate_b(t_stacks *stacks)
 {
-	t_list	*temp;
-
 	if (stacks->b == NULL || stacks->b->next == NULL)
 		return ;
-	temp = stacks->b;
-	while (temp->next != NULL)
-		temp = temp->next;
-	temp->next = stacks->b;
+	stacks->b->end = 1;
+	stacks->b->prev->end = 0;
 	stacks->b = stacks->b->next;
-	temp->next->next = NULL;
 	ft_lstapp(&stacks->oplist, ft_lstnew("rb\n", 4));
 }
 

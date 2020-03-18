@@ -18,15 +18,15 @@ int	print_error(void)
 	return (-1);
 }
 
-int	check_order(t_list *stack)
+int	check_order(t_twlist *stack)
 {
 	int	nb1;
 	int	nb2;
 
-	while (stack->next != NULL)
+	while (stack->end == 0)
 	{
-		nb1 = *(int *)stack->content;
-		nb2 = *(int *)stack->next->content;
+		nb1 = FIRST(stack);
+		nb2 = SECOND(stack);
 		if (nb1 > nb2)
 			return (0);
 		stack = stack->next;
@@ -48,6 +48,8 @@ int	exec_operation(char *op, t_stacks *stacks)
 		push_b(stacks);
 	else if (ft_strequ(op, "ra"))
 		rotate_a(stacks);
+	else if (ft_strequ(op, "ras"))
+		rotate_a_sorted(stacks);
 	else if (ft_strequ(op, "rb"))
 		rotate_b(stacks);
 	else if (ft_strequ(op, "rr"))

@@ -16,6 +16,7 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdint.h>
 
 # define BUFF_SIZE 4096
 # define MAX_FD 4864
@@ -26,6 +27,15 @@ typedef struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
+
+typedef struct		s_twlist
+{
+	void			*content;
+	size_t			content_size;
+	int8_t			end;
+	struct s_twlist	*next;
+	struct s_twlist	*prev;
+}					t_twlist;
 
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
@@ -101,7 +111,13 @@ void				*ft_lstpop(t_list **alst);
 size_t				ft_lstsize(t_list *lst);
 void				ft_lstfree(void *content, size_t content_size);
 t_list				*ft_lstchr(t_list *lst, int c);
+int					ft_lstcount(t_list *lst);
 int					get_next_line(const int fd, char **line);
 char				*ft_strreplace(char *search, char *replace, char **subject);
+t_twlist			*ft_twlstnew(void const *content, size_t content_size);
+void				ft_twlstadd(t_twlist **alst, t_twlist *new);
+void				ft_twlstapp(t_twlist **alst, t_twlist *new);
+int					ft_twlstcount(t_twlist *lst);
+void				ft_twlstconnect(t_twlist *lst);
 
 #endif

@@ -17,11 +17,11 @@
 #include <time.h>
 
 
-void		print_stack(t_list *stack)
+void		print_stack(t_twlist *stack)
 {
 	int	nb;
 
-	while (stack != NULL)
+	while (stack)
 	{
 		nb = *(int *)stack->content;
 		printf("%d\n", nb);
@@ -46,8 +46,8 @@ int			main(int argc, char **argv)
 		if (!exec_operation(line, &stacks))
 			return (print_error());
 		ft_strdel(&line);
-		sleep(1);
-		print_stacks(&stacks);
+		//sleep(1);
+		//print_stacks(&stacks);
 	}
 	if (!check_order(stacks.a) || stacks.b != NULL)
 	{

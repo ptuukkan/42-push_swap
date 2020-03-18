@@ -23,37 +23,36 @@
 
 typedef struct		s_stacks
 {
-	t_list	*a;
-	t_list	*b;
-	t_list	*oplist;
-	int		highest;
+	t_twlist	*a;
+	t_twlist	*b;
+	t_list		*oplist;
+	int			highest;
 }					t_stacks;
 
-int		init_stack(char **argv, t_list **stack_a);
+int		init_stack(char **argv, t_twlist **stack_a);
 void	swap_a(t_stacks *stacks);
 void	swap_b(t_stacks *stacks);
 void	swap_ab(t_stacks *stacks);
 void	push_a(t_stacks *stacks);
 void	push_b(t_stacks *stacks);
 void	rotate_a(t_stacks *stacks);
+void	rotate_a_sorted(t_stacks *stacks);
 void	rotate_b(t_stacks *stacks);
 void	rotate_ab(t_stacks *stacks);
 void	reverse_rotate_a(t_stacks *stacks);
 void	reverse_rotate_b(t_stacks *stacks);
 void	reverse_rotate_ab(t_stacks *stacks);
-int		check_order(t_list *stack);
-int		check_empty(t_list *stack);
+int		check_order(t_twlist *stack);
+int		check_empty(t_twlist *stack);
 int		exec_operation(char *instruction, t_stacks *stacks);
 int		print_error(void);
-void	sort_selection(t_list *stack_a, t_list *stack_b, t_list **operations, size_t n);
 void	print_operations(t_list *operations);
-void	print_stack(t_list *stack);
+void	print_stack(t_twlist *stack);
 int		sort_quick(t_stacks *stacks, int chunk);
-int		ft_lstcount(t_list *lst);
-int		*array_quicksort(t_list *lst, int size);
-int		get_median(t_list *stack, int size);
-int		get_next_over(t_list *stack, int pivot, int size);
-int		get_next_under(t_list *stack, int pivot, int size, int highest);
+int		*array_quicksort(t_twlist *lst, int size);
+int		get_median(t_twlist *stack, int size);
+int		get_next_over(t_twlist *stack, int pivot, int size);
+int		get_next_under(t_twlist *stack, int pivot, int size, int highest);
 int		push_under_pivot(t_stacks *stacks, int size);
 int		push_over_pivot(t_stacks *stacks);
 void	sort_stack(t_stacks *stacks);

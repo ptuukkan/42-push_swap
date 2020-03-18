@@ -24,11 +24,11 @@ void	print_operations(t_list *operations)
 	}
 }
 
-void		print_stack(t_list *stack)
+void		print_stack(t_twlist *stack)
 {
 	int	nb;
 
-	while (stack != NULL)
+	while (stack->end == 0)
 	{
 		nb = *(int *)stack->content;
 		printf("%d\n", nb);
@@ -77,14 +77,13 @@ int		main(int argc, char **argv)
 		return (print_error());
 	if (check_order(stacks.a))
 		return (0);
-	size = ft_lstcount(stacks.a);
+	size = ft_twlstcount(stacks.a);
 	if (size <= 3)
 		sort_small_a(&stacks, size);
 	else
 		sort_stack(&stacks);
 	//printf("%d\n", ft_lstcount(stacks.oplist));
 	op = optimize(stacks.oplist);
-	//(void)op;
 	ft_putstr(op);
 	//visualize(stacks.oplist, &copy);
 	return (0);

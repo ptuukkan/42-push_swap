@@ -14,27 +14,25 @@
 
 void	swap_a(t_stacks *stacks)
 {
-	t_list	*temp;
+	int	temp;
 
 	if (stacks->a == NULL || stacks->a->next == NULL)
 		return ;
-	temp = stacks->a->next;
-	stacks->a->next = temp->next;
-	temp->next = stacks->a;
-	stacks->a =  temp;
+	temp = FIRST(stacks->a);
+	FIRST(stacks->a) = SECOND(stacks->a);
+	SECOND(stacks->a) = temp;
 	ft_lstapp(&stacks->oplist, ft_lstnew("sa\n", 4));
 }
 
 void	swap_b(t_stacks *stacks)
 {
-	t_list	*temp;
+	int	temp;
 
 	if (stacks->b == NULL || stacks->b->next == NULL)
 		return ;
-	temp = stacks->b->next;
-	stacks->b->next = temp->next;
-	temp->next = stacks->b;
-	stacks->b =  temp;
+	temp = FIRST(stacks->b);
+	FIRST(stacks->b) = SECOND(stacks->b);
+	SECOND(stacks->b) = temp;
 	ft_lstapp(&stacks->oplist, ft_lstnew("sb\n", 4));
 }
 

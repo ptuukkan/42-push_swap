@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int		*ft_lsttoarray(t_list *lst, int size)
+int		*ft_lsttoarray(t_twlist *lst, int size)
 {
 	static int	*array;
 	int			i;
@@ -79,7 +79,7 @@ void	print_array(int *array, int size)
 	}
 }
 
-int		*array_quicksort(t_list *lst, int size)
+int		*array_quicksort(t_twlist *lst, int size)
 {
 	int	*array;
 

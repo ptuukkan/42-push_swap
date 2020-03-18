@@ -43,32 +43,34 @@ void		sort_small_a(t_stacks *stacks, int size)
 static void	sort_3_b(t_stacks *stacks, int a, int b, int c)
 {
 	if (a < b && a < c && b < c)
-		exec_operations(stacks, "pa\nra\npa\nra\npa\nra\n");
+		exec_operations(stacks, "pa\nras\npa\nras\npa\nras\n");
 	else if (a < b && a < c && b > c)
-		exec_operations(stacks, "pa\nra\npa\npa\nra\nra\n");
+		exec_operations(stacks, "pa\nras\npa\npa\nras\nras\n");
 	else if (a > b && a < c && b < c)
-		exec_operations(stacks, "pa\npa\nra\nra\npa\nra\n");
+		exec_operations(stacks, "pa\npa\nras\nras\npa\nras\n");
 	else if (a < b && a > c && b > c)
-		exec_operations(stacks, "sb\npa\npa\npa\nra\nra\nra\n");
+		exec_operations(stacks, "sb\npa\npa\npa\nras\nras\nras\n");
 	else if (a > b && a > c && b < c)
-		exec_operations(stacks, "pa\npa\nra\npa\nra\nra\n");
+		exec_operations(stacks, "pa\npa\nras\npa\nras\nras\n");
 	else if (a > b && a > c && b > c)
-		exec_operations(stacks, "pa\npa\npa\nra\nra\nra\n");
+		exec_operations(stacks, "pa\npa\npa\nras\nras\nras\n");
 }
 
 void	sort_small_b(t_stacks *stacks, int size)
 {
+	/*
 	stacks->highest = FIRST(stacks->b);
 	if (stacks->b->next && SECOND(stacks->b) > stacks->highest)
 		stacks->highest = SECOND(stacks->b);
 	if (stacks->b->next && stacks->b->next->next && THIRD(stacks->b) > stacks->highest)
 		stacks->highest = THIRD(stacks->b);
+	*/
 	if (size == 1)
-		exec_operations(stacks, "pa\nra\n");
+		exec_operations(stacks, "pa\nras\n");
 	else if (size == 2 && (FIRST(stacks->b) > SECOND(stacks->b)))
-		exec_operations(stacks, "pa\npa\nra\nra\n");
+		exec_operations(stacks, "pa\npa\nras\nras\n");
 	else if (size == 2)
-		exec_operations(stacks, "pa\nra\npa\nra\n");
+		exec_operations(stacks, "pa\nras\npa\nras\n");
 	else
 		sort_3_b(stacks, FIRST(stacks->b), SECOND(stacks->b),
 						THIRD(stacks->b));

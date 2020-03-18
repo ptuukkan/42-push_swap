@@ -14,31 +14,21 @@
 
 void	reverse_rotate_a(t_stacks *stacks)
 {
-	t_list	*temp;
-
 	if (stacks->a == NULL || stacks->a->next == NULL)
 		return ;
-	temp = stacks->a;
-	while (temp->next->next != NULL)
-		temp = temp->next;
-	temp->next->next = stacks->a;
-	stacks->a = temp->next;
-	temp->next = NULL;
+	stacks->a->prev->prev->end = 1;
+	stacks->a->prev->end = 0;
+	stacks->a = stacks->a->prev;
 	ft_lstapp(&stacks->oplist, ft_lstnew("rra\n", 5));
 }
 
 void	reverse_rotate_b(t_stacks *stacks)
 {
-	t_list	*temp;
-
 	if (stacks->b == NULL || stacks->b->next == NULL)
 		return ;
-	temp = stacks->b;
-	while (temp->next->next != NULL)
-		temp = temp->next;
-	temp->next->next = stacks->b;
-	stacks->b = temp->next;
-	temp->next = NULL;
+	stacks->b->prev->prev->end = 1;
+	stacks->b->prev->end = 0;
+	stacks->b = stacks->b->prev;
 	ft_lstapp(&stacks->oplist, ft_lstnew("rrb\n", 5));
 }
 

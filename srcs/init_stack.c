@@ -13,14 +13,14 @@
 #include "push_swap.h"
 #include <stdio.h>
 
-static int	check_duplicate(t_list *stack_a, int nb)
+static int	check_duplicate(t_twlist *stack_a, int nb)
 {
 	int	i;
 
 	i = 0;
-	while (stack_a != NULL)
+	while (stack_a)
 	{
-		if (nb == *(int *)stack_a->content)
+		if (nb == FIRST(stack_a))
 			i++;
 		stack_a = stack_a->next;
 	}
@@ -56,7 +56,7 @@ static int	check_multiple(char *str)
 	return (i);
 }
 
-int			init_stack(char **argv, t_list **stack_a)
+int			init_stack(char **argv, t_twlist **stack_a)
 {
 	long long	lnb;
 	int			nb;
@@ -71,10 +71,11 @@ int			init_stack(char **argv, t_list **stack_a)
 		if (lnb > 2147483647 || lnb < -2147483648)
 			return (0);
 		nb = (int)lnb;
-		ft_lstapp(stack_a, ft_lstnew(&nb, sizeof(nb)));
+		ft_twlstapp(stack_a, ft_twlstnew(&nb, sizeof(nb)));
 		if (!check_duplicate(*stack_a, nb))
 			return (0);
 		argv++;
 	}
+	ft_twlstconnect(*stack_a);
 	return (1);
 }

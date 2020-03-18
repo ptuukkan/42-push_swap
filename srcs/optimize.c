@@ -50,12 +50,12 @@ char	*optimize(t_list *oplist)
 
 	if (!(op = ft_lstfold(&oplist, &ft_lstjoin)))
 		exit(0);
-	return (op);
+	//return (op);
 	i = 0;
 	while (optimizations_found(&op))
 	{
 		i++;
 	}
-	printf("Optimizations found: %d\n", i);
+	//printf("Optimizations found: %d\n", i);
 	return (op);
 }
