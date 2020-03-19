@@ -81,7 +81,7 @@ int		main(int argc, char **argv)
 	if (size <= 3)
 		sort_small_a(&stacks, size);
 	else
-		sort_stack(&stacks);
+	sort_stack(&stacks);
 	//printf("%d\n", ft_lstcount(stacks.oplist));
 	op = optimize(stacks.oplist);
 	ft_putstr(op);
