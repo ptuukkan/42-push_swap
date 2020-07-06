@@ -75,8 +75,5 @@ void	exec_operations(t_stacks *stacks, char *ops)
 	i = 0;
 	while (split[i] != NULL)
 		exec_operation(split[i++], stacks);
-	i--;
-	while (i >= 0)
-		ft_strdel(&split[i--]);
-	free(split);
+	ft_strarrdel(&split);
 }

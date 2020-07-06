@@ -46,14 +46,12 @@ int			main(int argc, char **argv)
 		if (!exec_operation(line, &stacks))
 			return (print_error());
 		ft_strdel(&line);
-		//sleep(1);
-		//print_stacks(&stacks);
 	}
 	if (!check_order(stacks.a) || stacks.b != NULL)
 	{
-		ft_putstr("KO\n");
-		return (0);
+		ft_printf("KO\n");
+		return (1);
 	}
-	ft_putstr("OK\n");
+	ft_printf("OK\n");
 	return (0);
 }

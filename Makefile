@@ -26,7 +26,7 @@ GCC = gcc -Werror -Wextra -Wall -g
 
 all: $(NAME) $(CHECKER)
 
-$(NAME): $(OBJS) objects/push_swap.o libft/$(LIB) buildlib
+$(NAME): $(OBJS) objects/push_swap.o libft/$(LIB)
 	$(GCC) $(OBJS) objects/push_swap.o -o $(NAME) libft/$(LIB)
 
 $(CHECKER): $(OBJS) objects/checker.o libft/$(LIB)
