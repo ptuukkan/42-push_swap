@@ -59,32 +59,17 @@ void	visualize(t_list *oplist, t_stacks *stacks)
 int		main(int argc, char **argv)
 {
 	t_stacks	stacks;
-	t_stacks	copy;
 	int			size;
 	char		*op;
 
 	stacks.a = NULL;
 	stacks.b = NULL;
 	stacks.oplist = NULL;
-	copy.a = NULL;
-	copy.b = NULL;
-	copy.oplist = NULL;
 	if (argc == 1)
 		return (1);
 	if (!init_stack(argv + 1, &stacks.a))
 		return (print_error());
-	if (!init_stack(argv + 1, &copy.a))
-		return (print_error());
-	if (check_order(stacks.a))
-		return (0);
-	size = ft_twlstcount(stacks.a);
-	if (size <= 3)
-		sort_small_a(&stacks, size);
-	else
 	sort_stack(&stacks);
-	//printf("%d\n", ft_lstcount(stacks.oplist));
-	op = optimize(stacks.oplist);
-	ft_putstr(op);
-	//visualize(stacks.oplist, &copy);
+	print_operations(&stacks.oplist);
 	return (0);
 }
