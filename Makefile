@@ -26,6 +26,9 @@ GCC = gcc -Werror -Wextra -Wall -g
 
 all: $(NAME) $(CHECKER)
 
+test:
+	$(GCC) main.c libft/libft.a -I includes/ -I libft/includes/
+
 $(NAME): $(OBJS) objects/push_swap.o libft/$(LIB)
 	$(GCC) $(OBJS) objects/push_swap.o -o $(NAME) libft/$(LIB)
 
@@ -53,4 +56,4 @@ fclean : clean
 
 re: fclean all
 
-.PHONY: clean fclean all buildlib
+.PHONY: clean fclean all buildlib test

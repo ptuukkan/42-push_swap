@@ -59,8 +59,6 @@ void	visualize(t_list *oplist, t_stacks *stacks)
 int		main(int argc, char **argv)
 {
 	t_stacks	stacks;
-	int			size;
-	char		*op;
 
 	stacks.a = NULL;
 	stacks.b = NULL;
@@ -70,6 +68,6 @@ int		main(int argc, char **argv)
 	if (!init_stack(argv + 1, &stacks.a))
 		return (print_error());
 	sort_stack(&stacks);
-	print_operations(&stacks.oplist);
+	print_operations(stacks.oplist);
 	return (0);
 }

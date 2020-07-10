@@ -5,3 +5,5 @@ libft/objects/
 objects/
 .vscode/launch.json
 .vscode/tasks.json
+a.out
+main.c
