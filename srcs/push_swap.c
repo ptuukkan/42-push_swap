@@ -14,8 +14,28 @@
 #include <stdio.h>
 #include <time.h>
 
+t_avltree	*init_avl(t_twlist *stack)
+{
+	t_avltree	*avl;
+	t_avltree	*new;
 
-void	print_operations(t_list *operations)
+	avl = NULL;
+	while(!stack->end)
+	{
+		if (!(new = ft_avltnew(stack->content, stack->content_size)))
+			return (NULL);
+		if (!(avl = ft_avltinsert(avl, new, &ft_numcmp)))
+			return (NULL);
+		stack = stack->next;
+	}
+	if (!(new = ft_avltnew(stack->content, stack->content_size)))
+		return (NULL);
+	if (!(avl = ft_avltinsert(avl, new, &ft_numcmp)))
+		return (NULL);
+	return (avl);
+}
+
+void		print_operations(t_list *operations)
 {
 	while (operations)
 	{
@@ -26,14 +46,12 @@ void	print_operations(t_list *operations)
 
 void		print_stack(t_twlist *stack)
 {
-	int	nb;
-
 	while (stack->end == 0)
 	{
-		nb = *(int *)stack->content;
-		printf("%d\n", nb);
+		ft_printf("%d\n", FIRST(stack));
 		stack = stack->next;
 	}
+	ft_printf("%d\n", FIRST(stack));
 }
 
 
@@ -59,15 +77,21 @@ void	visualize(t_list *oplist, t_stacks *stacks)
 int		main(int argc, char **argv)
 {
 	t_stacks	stacks;
+	t_avltree	*avl;
 
 	stacks.a = NULL;
 	stacks.b = NULL;
 	stacks.oplist = NULL;
+	avl = NULL;
 	if (argc == 1)
 		return (1);
 	if (!init_stack(argv + 1, &stacks.a))
 		return (print_error());
-	sort_stack(&stacks);
-	print_operations(stacks.oplist);
+	//print_stack(stacks.a);
+	if (!(avl = init_avl(stacks.a)))
+		return (print_error());
+//	sort_stack(&stacks);
+//	print_operations(stacks.oplist);
+	ft_avltprint(avl, avl->height);
 	return (0);
 }
