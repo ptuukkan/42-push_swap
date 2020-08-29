@@ -18,23 +18,7 @@ void	push_a(t_stacks *stacks)
 
 	if (stacks->b == NULL)
 		return;
-	temp = stacks->b;
-	if (stacks->b->end)
-		stacks->b = NULL;
-	else if (stacks->b->next->end)
-	{
-		stacks->b = stacks->b->next;
-		stacks->b->next = NULL;
-		stacks->b->prev = NULL;
-	}
-	else
-	{
-		stacks->b->prev->next = stacks->b->next;
-		stacks->b->next->prev = stacks->b->prev;
-		stacks->b = stacks->b->next;
-	}
-	temp->next = NULL;
-	temp->prev = NULL;
+	temp = ft_twlstdetach(&stacks->b);
 	ft_twlstadd(&stacks->a, temp);
 	if (!stacks->a->prev && !stacks->a->end)
 		ft_twlstconnect(stacks->a);
@@ -47,21 +31,7 @@ void	push_b(t_stacks *stacks)
 
 	if (stacks->a == NULL)
 		return;
-	temp = stacks->a;
-	if (stacks->a->next->end)
-	{
-		stacks->a = stacks->a->next;
-		stacks->a->next = NULL;
-		stacks->a->prev = NULL;
-	}
-	else
-	{
-		stacks->a->prev->next = stacks->a->next;
-		stacks->a->next->prev = stacks->a->prev;
-		stacks->a = stacks->a->next;
-	}
-	temp->next = NULL;
-	temp->prev = NULL;
+	temp = ft_twlstdetach(&stacks->a);
 	ft_twlstadd(&stacks->b, temp);
 	if (!stacks->b->prev && !stacks->b->end)
 		ft_twlstconnect(stacks->b);

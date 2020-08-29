@@ -20,6 +20,10 @@
 # define FIRST(x) *(int *)x->content
 # define SECOND(x) *(int *)x->next->content
 # define THIRD(x) *(int *)x->next->next->content
+# define FOURTH(x) *(int *)x->next->next->next->content
+# define ROOT(x) *(int *)x->content
+# define LEFT(x) *(int *)x->left->content
+# define RIGHT(x) *(int *)x->right->content
 
 typedef struct		s_stacks
 {
@@ -27,6 +31,7 @@ typedef struct		s_stacks
 	t_twlist	*b;
 	t_list		*oplist;
 	int			highest;
+	int			*last_sorted;
 }					t_stacks;
 
 int		init_stack(char **argv, t_twlist **stack_a);
@@ -55,11 +60,16 @@ int		get_next_over(t_twlist *stack, int pivot, int size);
 int		get_next_under(t_twlist *stack, int pivot, int size, int highest);
 int		push_under_pivot(t_stacks *stacks, int size);
 int		push_over_pivot(t_stacks *stacks);
-void	sort_stack(t_stacks *stacks);
+void	sort_stack(t_stacks *stacks, t_avltree *avl);
 char	*optimize(t_list *oplist);
 void	exec_operations(t_stacks *stacks, char *ops);
 void	sort_small_a(t_stacks *stacks, int size);
 void	sort_small_b(t_stacks *stacks, int size);
 void	print_stacks(t_stacks *stacks);
+void	move_to_b(t_stacks *stacks, int ceil);
+void	move_to_a(t_stacks *stacks, int ceil);
+void	sort_left(t_stacks *stacks, t_avltree *avl);
+void	sort_right(t_stacks *stacks, t_avltree *avl);
+void	sort_small(t_stacks *stacks);
 
 #endif

@@ -90,8 +90,12 @@ int		main(int argc, char **argv)
 	//print_stack(stacks.a);
 	if (!(avl = init_avl(stacks.a)))
 		return (print_error());
-//	sort_stack(&stacks);
-//	print_operations(stacks.oplist);
-	ft_avltprint(avl, avl->height);
+	stacks.last_sorted = NULL;
+	if (ft_avltheight(avl) > 2)
+		sort_stack(&stacks, avl);
+	else
+		sort_small(&stacks);
+	print_operations(stacks.oplist);
+	//ft_avltprint(avl, ft_avltheight(avl));
 	return (0);
 }

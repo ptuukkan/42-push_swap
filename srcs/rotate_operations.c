@@ -24,8 +24,10 @@ void	rotate_a(t_stacks *stacks)
 
 void	rotate_a_sorted(t_stacks *stacks)
 {
-	if (FIRST(stacks->a) > stacks->highest)
-		stacks->highest = FIRST(stacks->a);
+	if (stacks->last_sorted == NULL)
+		stacks->last_sorted = (int *)ft_memdup(&FIRST(stacks->a), stacks->a->content_size);
+	else if (FIRST(stacks->a) > *stacks->last_sorted)
+		ft_memcpy(stacks->last_sorted, &FIRST(stacks->a), stacks->a->content_size);
 	rotate_a(stacks);
 }
 
