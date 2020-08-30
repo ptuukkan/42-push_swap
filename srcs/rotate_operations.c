@@ -19,7 +19,7 @@ void	rotate_a(t_stacks *stacks)
 	stacks->a->end = 1;
 	stacks->a->prev->end = 0;
 	stacks->a = stacks->a->next;
-	ft_lstapp(&stacks->oplist, ft_lstnew("ra\n", 4));
+	append_op(&stacks->oplist, "ra\n");
 }
 
 void	rotate_a_sorted(t_stacks *stacks)
@@ -38,7 +38,7 @@ void	rotate_b(t_stacks *stacks)
 	stacks->b->end = 1;
 	stacks->b->prev->end = 0;
 	stacks->b = stacks->b->next;
-	ft_lstapp(&stacks->oplist, ft_lstnew("rb\n", 4));
+	append_op(&stacks->oplist, "rb\n");
 }
 
 void	rotate_ab(t_stacks *stacks)

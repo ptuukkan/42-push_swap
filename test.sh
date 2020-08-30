@@ -5,7 +5,7 @@ test()
 	i=0
 	FAILED=0
 	TOTAL=0
-	while [ $i -lt 100 ]
+	while [ $i -lt 1000 ]
 	do
 		ARG=$(./nbgen.pl $1 2000)
 		RES=$(./push_swap $ARG | ./checker $ARG)
@@ -35,59 +35,59 @@ test()
 }
 
 test "1"
-TESTS=$(( 100 - $FAILED))
+TESTS=$(( 1000 - $FAILED))
 AVG=$(( $TOTAL / $TESTS ))
-printf "1: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "100" "$AVG" "$BEST" "$WORST"
+printf "1: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "1000" "$AVG" "$BEST" "$WORST"
 
 test "2"
-TESTS=$(( 100 - $FAILED))
+TESTS=$(( 1000 - $FAILED))
 AVG=$(( $TOTAL / $TESTS ))
-printf "2: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "100" "$AVG" "$BEST" "$WORST"
+printf "2: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "1000" "$AVG" "$BEST" "$WORST"
 
 test "3"
-TESTS=$(( 100 - $FAILED))
+TESTS=$(( 1000 - $FAILED))
 AVG=$(( $TOTAL / $TESTS ))
-printf "3: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "100" "$AVG" "$BEST" "$WORST"
+printf "3: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "1000" "$AVG" "$BEST" "$WORST"
 
 test "4"
-TESTS=$(( 100 - $FAILED))
+TESTS=$(( 1000 - $FAILED))
 AVG=$(( $TOTAL / $TESTS ))
-printf "4: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "100" "$AVG" "$BEST" "$WORST"
+printf "4: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "1000" "$AVG" "$BEST" "$WORST"
 
 test "5"
-TESTS=$(( 100 - $FAILED))
+TESTS=$(( 1000 - $FAILED))
 AVG=$(( $TOTAL / $TESTS ))
-printf "5: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "100" "$AVG" "$BEST" "$WORST"
+printf "5: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "1000" "$AVG" "$BEST" "$WORST"
 
 test "6"
-TESTS=$(( 100 - $FAILED))
+TESTS=$(( 1000 - $FAILED))
 AVG=$(( $TOTAL / $TESTS ))
-printf "6: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "100" "$AVG" "$BEST" "$WORST"
+printf "6: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "1000" "$AVG" "$BEST" "$WORST"
 
 test "10"
-TESTS=$(( 100 - $FAILED))
+TESTS=$(( 1000 - $FAILED))
 AVG=$(( $TOTAL / $TESTS ))
-printf "10: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "100" "$AVG" "$BEST" "$WORST"
+printf "10: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "1000" "$AVG" "$BEST" "$WORST"
 
 test "20"
-TESTS=$(( 100 - $FAILED))
+TESTS=$(( 1000 - $FAILED))
 AVG=$(( $TOTAL / $TESTS ))
-printf "20: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "100" "$AVG" "$BEST" "$WORST"
+printf "20: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "1000" "$AVG" "$BEST" "$WORST"
 
 test "50"
-TESTS=$(( 100 - $FAILED))
+TESTS=$(( 1000 - $FAILED))
 AVG=$(( $TOTAL / $TESTS ))
-printf "50: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "100" "$AVG" "$BEST" "$WORST"
+printf "50: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "1000" "$AVG" "$BEST" "$WORST"
 
 test "100"
-TESTS=$(( 100 - $FAILED))
+TESTS=$(( 1000 - $FAILED))
 AVG=$(( $TOTAL / $TESTS ))
-printf "100: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "100" "$AVG" "$BEST" "$WORST"
+printf "100: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "1000" "$AVG" "$BEST" "$WORST"
 
 test "500"
-TESTS=$(( 100 - $FAILED))
+TESTS=$(( 1000 - $FAILED))
 AVG=$(( $TOTAL / $TESTS ))
-printf "500: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "100" "$AVG" "$BEST" "$WORST"
+printf "500: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "1000" "$AVG" "$BEST" "$WORST"
 
 
 

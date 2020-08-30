@@ -19,7 +19,7 @@ void	reverse_rotate_a(t_stacks *stacks)
 	stacks->a->prev->prev->end = 1;
 	stacks->a->prev->end = 0;
 	stacks->a = stacks->a->prev;
-	ft_lstapp(&stacks->oplist, ft_lstnew("rra\n", 5));
+	append_op(&stacks->oplist, "rra\n");
 }
 
 void	reverse_rotate_b(t_stacks *stacks)
@@ -29,7 +29,7 @@ void	reverse_rotate_b(t_stacks *stacks)
 	stacks->b->prev->prev->end = 1;
 	stacks->b->prev->end = 0;
 	stacks->b = stacks->b->prev;
-	ft_lstapp(&stacks->oplist, ft_lstnew("rrb\n", 5));
+	append_op(&stacks->oplist, "rrb\n");
 }
 
 void	reverse_rotate_ab(t_stacks *stacks)

@@ -22,7 +22,7 @@ void	push_a(t_stacks *stacks)
 	ft_twlstadd(&stacks->a, temp);
 	if (!stacks->a->prev && !stacks->a->end)
 		ft_twlstconnect(stacks->a);
-	ft_lstapp(&stacks->oplist, ft_lstnew("pa\n", 4));
+	append_op(&stacks->oplist, "pa\n");
 }
 
 void	push_b(t_stacks *stacks)
@@ -35,5 +35,5 @@ void	push_b(t_stacks *stacks)
 	ft_twlstadd(&stacks->b, temp);
 	if (!stacks->b->prev && !stacks->b->end)
 		ft_twlstconnect(stacks->b);
-	ft_lstapp(&stacks->oplist, ft_lstnew("pb\n", 4));
+	append_op(&stacks->oplist, "pb\n");
 }

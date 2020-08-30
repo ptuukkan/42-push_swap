@@ -54,60 +54,24 @@ void	print_numbers(t_list *numbers)
 
 void	sort_stack(t_stacks *stacks, t_avltree *avl)
 {
-	//ft_printf("root: %d\n", ROOT(avl));
-//	print_stacks(stacks);
 	if (ft_avltheight(avl) < 3)
-	{
-		//ft_printf("return\n");
 		return ;
-	}
 	if (!stacks->b)
-	{
-		//ft_printf("B is empty, moving stuff to B\n");
 		move_to_b(stacks, ROOT(avl));
-		//print_stacks(stacks);
-	}
 	else if (ft_avltheight(avl) > 2)
-	{
-		//ft_printf("move stuff to A\n");
 		move_to_a(stacks, ROOT(avl));
-		//print_stacks(stacks);
-	}
-//	ft_printf("go left\n");
 	sort_stack(stacks, avl->left);
 	if (ft_avltheight(avl) == 3)
 	{
-		//ft_printf("height is 3\n");
-		//print_stacks(stacks);
-		//ft_printf("sort left\n");
 		sort_left(stacks, avl->left);
-	//	print_stacks(stacks);
-		//ft_printf("sort right\n");
 		sort_right(stacks, avl);
-		//print_stacks(stacks);
 	}
 	else if (ft_avltheight(avl) == 4)
 	{
 		if (ft_avltheight(avl->left) == 2)
-		{
-			//ft_printf("height is 4\n");
-		//	print_stacks(stacks);
-			//ft_printf("sort left\n");
 			sort_left(stacks, avl->left);
-			//print_stacks(stacks);
-		}
-
 		if (ft_avltheight(avl->right) == 2)
-		{
-			//ft_printf("height is 4\n");
-			//print_stacks(stacks);
-			//ft_printf("sort right\n");
 			sort_right(stacks, avl);
-			//print_stacks(stacks);
-		}
-
 	}
-	//ft_printf("go right\n");
 	sort_stack(stacks, avl->right);
-	//ft_printf("return\n");
 }

@@ -71,5 +71,6 @@ void	move_to_a(t_stacks *stacks, int ceil);
 void	sort_left(t_stacks *stacks, t_avltree *avl);
 void	sort_right(t_stacks *stacks, t_avltree *avl);
 void	sort_small(t_stacks *stacks);
+void	append_op(t_list **oplist, char *op);
 
 #endif
