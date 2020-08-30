@@ -18,6 +18,8 @@ static int	duplicate_number(t_twlist *stack_a, int nb)
 	{
 		if (nb == FIRST(stack_a))
 			return (1);
+		if (stack_a->end)
+			break ;
 		stack_a = stack_a->next;
 	}
 	return (0);
@@ -72,6 +74,5 @@ int			init_stack(char **argv, t_twlist **stack_a)
 		ft_strarrdel(&numbers);
 		argv++;
 	}
-	ft_twlstconnect(*stack_a);
 	return (1);
 }

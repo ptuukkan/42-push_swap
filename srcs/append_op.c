@@ -29,20 +29,20 @@ static int	check_matching(char *last_op, char *new_op)
 	return (0);
 }
 
-void	append_op(t_list **oplist, char *op)
+void	append_op(t_twlist **oplist, char *op)
 {
-	t_list	*tmp;
+	t_twlist	*tmp;
+	int			size;
 
 	tmp = *oplist;
-	if (!tmp || !tmp->next)
+	size = ft_twlstcount(tmp);
+	if (size < 2)
 	{
-		ft_lstapp(oplist, ft_lstnew(op, ft_strlen(op) + 1));
+		ft_twlstapp(oplist, ft_twlstnew(op, ft_strlen(op) + 1));
 		return ;
 	}
-	while (tmp->next->next)
-		tmp = tmp->next;
-	if (check_matching((char *)tmp->next->content, op))
-		ft_lstdelone(&tmp->next, &ft_lstfree);
+	if (check_matching((char *)tmp->prev->content, op))
+		ft_twlstdelone(&tmp->prev, &ft_lstfree);
 	else
-		tmp->next->next = ft_lstnew(op, ft_strlen(op) + 1);
+		ft_twlstapp(oplist, ft_twlstnew(op, ft_strlen(op) + 1));
 }

@@ -29,7 +29,7 @@ typedef struct		s_stacks
 {
 	t_twlist	*a;
 	t_twlist	*b;
-	t_list		*oplist;
+	t_twlist	*oplist;
 	int			highest;
 	int			*last_sorted;
 }					t_stacks;
@@ -51,7 +51,7 @@ int		check_order(t_twlist *stack);
 int		check_empty(t_twlist *stack);
 int		exec_operation(char *instruction, t_stacks *stacks);
 int		print_error(void);
-void	print_operations(t_list *operations);
+void	print_operations(t_twlist *operations);
 void	print_stack(t_twlist *stack);
 int		sort_quick(t_stacks *stacks, int chunk);
 int		*array_quicksort(t_twlist *lst, int size);
@@ -71,6 +71,6 @@ void	move_to_a(t_stacks *stacks, int ceil);
 void	sort_left(t_stacks *stacks, t_avltree *avl);
 void	sort_right(t_stacks *stacks, t_avltree *avl);
 void	sort_small(t_stacks *stacks);
-void	append_op(t_list **oplist, char *op);
+void	append_op(t_twlist **oplist, char *op);
 
 #endif

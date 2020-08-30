@@ -89,6 +89,8 @@ static int	find_over(t_twlist *b, int nb, int *position)
 
 	next = 0;
 	prev = 0;
+	if (!b)
+		return (0);
 	if (find_next_over(b, nb, &next) && find_prev_over(b, nb, &prev))
 	{
 		if (ft_abs(prev) < ft_abs(next))

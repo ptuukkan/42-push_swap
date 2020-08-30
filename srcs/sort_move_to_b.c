@@ -57,6 +57,8 @@ static int	find_next(t_twlist *a, int *floor, int ceil, int *position)
 
 	fwd = 0;
 	rev = 0;
+	if (!a)
+		return (0);
 	if (find_next_fwd(a, floor, ceil, &fwd) && find_next_rev(a, floor, ceil, &rev))
 	{
 		if (ft_abs(rev) < ft_abs(fwd))

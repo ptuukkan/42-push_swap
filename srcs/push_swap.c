@@ -20,28 +20,29 @@ t_avltree	*init_avl(t_twlist *stack)
 	t_avltree	*new;
 
 	avl = NULL;
-	while(!stack->end)
+	while(stack)
 	{
 		if (!(new = ft_avltnew(stack->content, stack->content_size)))
 			return (NULL);
 		if (!(avl = ft_avltinsert(avl, new, &ft_numcmp)))
 			return (NULL);
+		if (stack->end)
+			break ;
 		stack = stack->next;
 	}
-	if (!(new = ft_avltnew(stack->content, stack->content_size)))
-		return (NULL);
-	if (!(avl = ft_avltinsert(avl, new, &ft_numcmp)))
-		return (NULL);
 	return (avl);
 }
 
-void		print_operations(t_list *operations)
+void		print_operations(t_twlist *operations)
 {
-	while (operations)
+	if (!operations)
+		return ;
+	while (!operations->end)
 	{
 		ft_putstr((char *)operations->content);
 		operations = operations->next;
 	}
+	ft_putstr((char *)operations->content);
 }
 
 void		print_stack(t_twlist *stack)
@@ -87,7 +88,6 @@ int		main(int argc, char **argv)
 		return (1);
 	if (!init_stack(argv + 1, &stacks.a))
 		return (print_error());
-	//print_stack(stacks.a);
 	if (!(avl = init_avl(stacks.a)))
 		return (print_error());
 	stacks.last_sorted = NULL;
