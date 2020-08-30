@@ -32,11 +32,9 @@ static int	check_matching(char *last_op, char *new_op)
 void	append_op(t_twlist **oplist, char *op)
 {
 	t_twlist	*tmp;
-	int			size;
 
 	tmp = *oplist;
-	size = ft_twlstcount(tmp);
-	if (size < 2)
+	if (!tmp || tmp == tmp->next)
 	{
 		ft_twlstapp(oplist, ft_twlstnew(op, ft_strlen(op) + 1));
 		return ;
