@@ -12,38 +12,6 @@
 
 #include "push_swap.h"
 
-static void	prepare_a(t_stacks *stacks, int last_sorted)
-{
-	int			fwd;
-	int			rev;
-	t_twlist	*a;
-
-	a = stacks->a;
-	fwd = 1;
-	rev = -1;
-	while (FIRST(a) != last_sorted)
-	{
-		a = a->next;
-		fwd++;
-	}
-	a = stacks->a;
-	while (FIRST(a) != last_sorted)
-	{
-		a = a->prev;
-		rev++;
-	}
-	if (rev < fwd)
-	{
-		while (rev-- > 0)
-			reverse_rotate_a(stacks);
-	}
-	else
-	{
-		while (fwd-- > 0)
-			rotate_a(stacks);
-	}
-}
-
 static int	find_prev_over(t_twlist *b, int nb, int *position)
 {
 	int home;

@@ -55,26 +55,6 @@ void		print_stack(t_twlist *stack)
 	ft_printf("%d\n", FIRST(stack));
 }
 
-
-void	visualize(t_list *oplist, t_stacks *stacks)
-{
-//	char	*line;
-
-	print_stacks(stacks);
-	while (oplist)
-	{
-		//while (get_next_line(0, &line) && *line != '\0')
-		//{
-		//	if (*line == '\n')
-		//		break ;
-		//}
-		printf("%s", (char*)oplist->content);
-		exec_operation((char*)oplist->content, stacks);
-		print_stacks(stacks);
-		oplist = oplist->next;
-	}
-}
-
 int		main(int argc, char **argv)
 {
 	t_stacks	stacks;
@@ -91,11 +71,12 @@ int		main(int argc, char **argv)
 	if (!(avl = init_avl(stacks.a)))
 		return (print_error());
 	stacks.last_sorted = NULL;
+	if (check_order(stacks.a))
+		return (0);
 	if (ft_avltheight(avl) > 2)
 		sort_stack(&stacks, avl);
 	else
 		sort_small(&stacks);
 	print_operations(stacks.oplist);
-	//ft_avltprint(avl, ft_avltheight(avl));
 	return (0);
 }

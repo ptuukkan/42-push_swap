@@ -17,7 +17,8 @@ SRCDIR = srcs
 SRCS = exec_and_check.c init_stack.c push_operations.c rotate_operations.c \
 		reverse_rotate_operations.c swap_operations.c \
 		sort_stack.c array_quicksort.c optimize.c sort_small.c \
-		sort_move_to_a.c sort_move_to_b.c sort_left.c sort_right.c append_op.c
+		sort_move_to_a.c sort_move_to_b.c sort_left.c sort_right.c append_op.c \
+		prepare_a.c
 
 OBJDIR = objects
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
