@@ -12,71 +12,98 @@
 
 #include "push_swap.h"
 
-static int	find_prev_over(t_twlist *b, int nb, int *position)
+static int	find_next_rev(t_twlist *lst, int low, int high, int *position)
 {
 	int home;
 
-	home = FIRST(b);
-	if (home >= nb)
+	home = FIRST(lst);
+	if (home >= low && home <= high)
 		return (1);
-	b = b->prev;
+	lst = lst->prev;
 	*position = -1;
-	while (b && FIRST(b) != home)
+	while (lst && FIRST(lst) != home)
 	{
-		if (FIRST(b) >= nb)
+		if (FIRST(lst) >= low && FIRST(lst) <= high)
 			return (1);
-		b = b->prev;
+		lst = lst->prev;
 		(*position)--;
 	}
 	return (0);
 }
 
-static int	find_next_over(t_twlist *b, int nb, int *position)
+static int	find_next_fwd(t_twlist *lst, int low, int high, int *position)
 {
 	int home;
 
-	home = FIRST(b);
-	if (home >= nb)
+	home = FIRST(lst);
+	if (home >= low && home <= high)
 		return (1);
-	b = b->next;
+	lst = lst->next;
 	*position = 1;
-	while (b && FIRST(b) != home)
+	while (lst && FIRST(lst) != home)
 	{
-		if (FIRST(b) >= nb)
+		if (FIRST(lst) >= low && FIRST(lst) <= high)
 			return (1);
-		b = b->next;
+		lst = lst->next;
 		(*position)++;
 	}
 	return (0);
 }
 
-static int	find_over(t_twlist *b, int nb, int *position)
+static int	find_next(t_twlist *lst, int low, int high, int *position)
 {
-	int	next;
-	int	prev;
+	int	fwd;
+	int	rev;
 
-	next = 0;
-	prev = 0;
-	if (!b)
+	fwd = 0;
+	rev = 0;
+	if (!lst)
 		return (0);
-	if (find_next_over(b, nb, &next) && find_prev_over(b, nb, &prev))
+	if (find_next_fwd(lst, low, high, &fwd) && find_next_rev(lst, low, high, &rev))
 	{
-		if (ft_abs(prev) < ft_abs(next))
-			*position = prev;
+		if (ft_abs(rev) < ft_abs(fwd))
+			*position = rev;
 		else
-			*position = next;
+			*position = fwd;
 		return (1);
 	}
 	return (0);
 }
 
-void	move_to_a(t_stacks *stacks, int nb)
+void	move_to_b(t_stacks *stacks, t_chunk *chunk)
 {
 	int	position;
+	int remaining;
 
+	remaining = chunk->size;
+	position = 0;
+	while (remaining > 0 && find_next(stacks->a, chunk->low, chunk->high, &position))
+	{
+		while (position > 0)
+		{
+			rotate_a(stacks);
+			position--;
+		}
+		while (position < 0)
+		{
+			reverse_rotate_a(stacks);
+			position++;
+		}
+		push_b(stacks);
+		remaining--;
+	}
 	if (stacks->last_sorted)
 		prepare_a(stacks, *stacks->last_sorted);
-	while ((find_over(stacks->b, nb, &position)))
+}
+
+void	move_to_a(t_stacks *stacks, t_chunk *chunk)
+{
+	int	position;
+	int remaining;
+
+	remaining = chunk->size;
+	position = 0;
+	while (remaining > 0 && find_next(stacks->b, chunk->low, chunk->high, &position))
 	{
 		while (position > 0)
 		{
@@ -89,5 +116,6 @@ void	move_to_a(t_stacks *stacks, int nb)
 			position++;
 		}
 		push_a(stacks);
+		remaining--;
 	}
 }

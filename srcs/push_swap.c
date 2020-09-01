@@ -14,25 +14,6 @@
 #include <stdio.h>
 #include <time.h>
 
-t_avltree	*init_avl(t_twlist *stack)
-{
-	t_avltree	*avl;
-	t_avltree	*new;
-
-	avl = NULL;
-	while(stack)
-	{
-		if (!(new = ft_avltnew(stack->content, stack->content_size)))
-			return (NULL);
-		if (!(avl = ft_avltinsert(avl, new, &ft_numcmp)))
-			return (NULL);
-		if (stack->end)
-			break ;
-		stack = stack->next;
-	}
-	return (avl);
-}
-
 void		print_operations(t_twlist *operations)
 {
 	if (!operations)
@@ -43,6 +24,18 @@ void		print_operations(t_twlist *operations)
 		operations = operations->next;
 	}
 	ft_putstr((char *)operations->content);
+}
+
+void	print_array(int *array, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		ft_printf("%d\n", array[i]);
+		i++;
+	}
 }
 
 void		print_stack(t_twlist *stack)
@@ -58,25 +51,25 @@ void		print_stack(t_twlist *stack)
 int		main(int argc, char **argv)
 {
 	t_stacks	stacks;
-	t_avltree	*avl;
+	int			*numbers;
+	int			size;
 
 	stacks.a = NULL;
 	stacks.b = NULL;
 	stacks.oplist = NULL;
-	avl = NULL;
+	numbers = NULL;
+	stacks.chunks = NULL;
+	stacks.last_sorted = NULL;
 	if (argc == 1)
 		return (1);
 	if (!init_stack(argv + 1, &stacks.a))
 		return (print_error());
-	if (!(avl = init_avl(stacks.a)))
+	size = ft_twlstcount(stacks.a);
+	if (!(numbers = init_array(stacks.a, size)))
 		return (print_error());
-	stacks.last_sorted = NULL;
-	if (check_order(stacks.a))
-		return (0);
-	if (ft_avltheight(avl) > 2)
-		sort_stack(&stacks, avl);
-	else
-		sort_small(&stacks);
+	if (!(stacks.chunks = calculate_chunks(numbers, size)))
+		return (print_error());
+	sort_stack(&stacks, size);
 	print_operations(stacks.oplist);
 	return (0);
 }

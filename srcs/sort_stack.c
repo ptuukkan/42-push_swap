@@ -52,26 +52,32 @@ void	print_numbers(t_list *numbers)
 	ft_printf("\n");
 }
 
-void	sort_stack(t_stacks *stacks, t_avltree *avl)
+static void	sort_chunk(t_stacks *stacks, t_btree *chunks)
 {
-	if (ft_avltheight(avl) < 3)
+	if (!chunks)
 		return ;
-	if (!stacks->b)
-		move_to_b(stacks, ROOT(avl));
-	else if (ft_avltheight(avl) > 2)
-		move_to_a(stacks, ROOT(avl));
-	sort_stack(stacks, avl->left);
-	if (ft_avltheight(avl) == 3)
+	if (stacks->b && chunks->right)
+		move_to_a(stacks, chunks->right->content);
+	else if (!stacks->b && chunks->left)
+		move_to_b(stacks, chunks->left->content);
+	sort_chunk(stacks, chunks->left);
+	if (((t_chunk *)chunks->content)->size < 4)
+		sort(stacks, chunks->content);
+	sort_chunk(stacks, chunks->right);
+}
+
+void		sort_stack(t_stacks *stacks, int size)
+{
+	int	i;
+
+	(void)size;
+	i = 0;
+	if (check_order(stacks->a))
+		return ;
+	while (stacks->chunks[i])
 	{
-		sort_left(stacks, avl->left);
-		sort_right(stacks, avl);
+		move_to_b(stacks, stacks->chunks[i]->content);
+		sort_chunk(stacks, stacks->chunks[i]);
+		i++;
 	}
-	else if (ft_avltheight(avl) == 4)
-	{
-		if (ft_avltheight(avl->left) == 2)
-			sort_left(stacks, avl->left);
-		if (ft_avltheight(avl->right) == 2)
-			sort_right(stacks, avl);
-	}
-	sort_stack(stacks, avl->right);
 }

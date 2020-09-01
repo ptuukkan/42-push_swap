@@ -25,11 +25,19 @@
 # define LEFT(x) *(int *)x->left->content
 # define RIGHT(x) *(int *)x->right->content
 
+typedef struct		s_chunk
+{
+	int	low;
+	int	high;
+	int	size;
+}					t_chunk;
+
 typedef struct		s_stacks
 {
 	t_twlist	*a;
 	t_twlist	*b;
 	t_twlist	*oplist;
+	t_btree		**chunks;
 	int			*last_sorted;
 }					t_stacks;
 
@@ -52,16 +60,17 @@ int		exec_operation(char *instruction, t_stacks *stacks);
 int		print_error(void);
 void	print_operations(t_twlist *operations);
 void	print_stack(t_twlist *stack);
-void	sort_stack(t_stacks *stacks, t_avltree *avl);
 void	exec_operations(t_stacks *stacks, char *ops);
 void	sort_small_a(t_stacks *stacks, int size);
 void	sort_small_b(t_stacks *stacks, int size);
 void	print_stacks(t_stacks *stacks);
-void	move_to_b(t_stacks *stacks, int ceil);
-void	move_to_a(t_stacks *stacks, int ceil);
-void	sort_left(t_stacks *stacks, t_avltree *avl);
-void	sort_right(t_stacks *stacks, t_avltree *avl);
+void	move_to_b(t_stacks *stacks, t_chunk *chunk);
+void	move_to_a(t_stacks *stacks, t_chunk *chunk);
+void	sort(t_stacks *stacks, t_chunk *chunk);
 void	sort_small(t_stacks *stacks);
+void	sort_stack(t_stacks *stacks, int size);
 void	append_op(t_twlist **oplist, char *op);
+int		*init_array(t_twlist *lst, int size);
+t_btree	**calculate_chunks(int *numbers, int size);
 
 #endif
