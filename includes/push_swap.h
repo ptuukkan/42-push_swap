@@ -21,6 +21,7 @@
 # define SECOND(x) *(int *)x->next->content
 # define THIRD(x) *(int *)x->next->next->content
 # define FOURTH(x) *(int *)x->next->next->next->content
+# define PREV(x) *(int *)x->prev->content
 # define ROOT(x) *(int *)x->content
 # define LEFT(x) *(int *)x->left->content
 # define RIGHT(x) *(int *)x->right->content
@@ -61,13 +62,11 @@ int		print_error(void);
 void	print_operations(t_twlist *operations);
 void	print_stack(t_twlist *stack);
 void	exec_operations(t_stacks *stacks, char *ops);
-void	sort_small_a(t_stacks *stacks, int size);
-void	sort_small_b(t_stacks *stacks, int size);
 void	print_stacks(t_stacks *stacks);
 void	move_to_b(t_stacks *stacks, t_chunk *chunk);
 void	move_to_a(t_stacks *stacks, t_chunk *chunk);
 void	sort(t_stacks *stacks, t_chunk *chunk);
-void	sort_small(t_stacks *stacks);
+void	sort_small(t_stacks *stacks, int size);
 void	sort_stack(t_stacks *stacks, int size);
 void	append_op(t_twlist **oplist, char *op);
 int		*init_array(t_twlist *lst, int size);

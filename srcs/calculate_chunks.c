@@ -50,12 +50,23 @@ void		print_chunks(void *content)
 t_btree		**calculate_chunks(int *numbers, int size)
 {
 	t_btree	**chunk_array;
+	int		num_chunks;
+	int		i;
 
+	// if (size > 90)
+	// 	num_chunks = 10;
+	// else
+	num_chunks = 2;
+	i = 0;
 	chunk_array = NULL;
-	if (!(chunk_array = (t_btree **)ft_memalloc(sizeof(t_btree *) * 3)))
+	if (!(chunk_array = (t_btree **)ft_memalloc(sizeof(t_btree *) * num_chunks + 1)))
 		return (NULL);
-	chunk_array[0] = calculate_chunk(numbers, chunk_array[0], size / 2);
-	chunk_array[1] = calculate_chunk(numbers + (size / 2), chunk_array[1], size - (size / 2));
-	chunk_array[2] = NULL;
+	while (i < num_chunks)
+	{
+		chunk_array[i] = calculate_chunk(numbers + (size / num_chunks * i), chunk_array[i],
+			size / num_chunks);
+		i++;
+	}
+	chunk_array[i] = NULL;
 	return (chunk_array);
 }

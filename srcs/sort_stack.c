@@ -70,10 +70,11 @@ void		sort_stack(t_stacks *stacks, int size)
 {
 	int	i;
 
-	(void)size;
 	i = 0;
 	if (check_order(stacks->a))
 		return ;
+	if (size < 6)
+		return (sort_small(stacks, size));
 	while (stacks->chunks[i])
 	{
 		move_to_b(stacks, stacks->chunks[i]->content);
