@@ -16,7 +16,7 @@ LIB = libft.a
 SRCDIR = srcs
 SRCS = exec_and_check.c init_stack.c push_operations.c rotate_operations.c \
 		reverse_rotate_operations.c swap_operations.c calculate_chunks.c \
-		sort_stack.c init_array.c sort_small.c sort.c move_chunk.c \
+		sort_stack.c init_array.c sort_small.c sort.c \
 		sort_move.c append_op.c prepare_a.c push_a_sort.c utilities.c \
 		calculate_chunk_moves.c move_chunk_a.c move_chunk_b.c sort_chunk_a.c \
 		sort_to_a.c
