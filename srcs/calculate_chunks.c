@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-static t_btree	*new_chunk(int low, int high, int size)
+static t_btree	*new_chunk(int low, int high, int size, int level)
 {
 	t_chunk	*chunk;
 	t_btree	*node;
@@ -23,6 +23,7 @@ static t_btree	*new_chunk(int low, int high, int size)
 	chunk->low = low;
 	chunk->high = high;
 	chunk->size = size;
+	chunk->level = level;
 	if (!(node = ft_btreenew(NULL, 0)))
 		return (NULL);
 	node->content = chunk;
@@ -30,14 +31,14 @@ static t_btree	*new_chunk(int low, int high, int size)
 	return (node);
 }
 
-static t_btree	*calculate_chunk(int *numbers, t_btree *chunks, int size)
+static t_btree	*calculate_chunk(int *numbers, t_btree *chunks, int size, int level)
 {
-	if (!(chunks = new_chunk(numbers[0], numbers[size - 1], size - 0)))
+	if (!(chunks = new_chunk(numbers[0], numbers[size - 1], size - 0, level)))
 		ft_exiterror("error", 1, 2);
-	if (size > 3)
+	if (size > 5)
 	{
-		chunks->left = calculate_chunk(numbers, chunks->left, size / 2);
-		chunks->right = calculate_chunk(numbers + (size / 2), chunks->right, size - (size / 2));
+		chunks->left = calculate_chunk(numbers, chunks->left, size / 2, level + 1);
+		chunks->right = calculate_chunk(numbers + (size / 2), chunks->right, size - (size / 2), level + 1);
 	}
 	return (chunks);
 }
@@ -64,7 +65,7 @@ t_btree		**calculate_chunks(int *numbers, int size)
 	while (i < num_chunks)
 	{
 		chunk_array[i] = calculate_chunk(numbers + (size / num_chunks * i), chunk_array[i],
-			size / num_chunks);
+			size / num_chunks, 1);
 		i++;
 	}
 	chunk_array[i] = NULL;

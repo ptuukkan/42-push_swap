@@ -52,33 +52,44 @@ void	print_numbers(t_list *numbers)
 	ft_printf("\n");
 }
 
-static void	sort_chunk(t_stacks *stacks, t_btree *chunks)
+static void	move_chunks_to_b(t_stacks *stacks, t_btree *chunks, int sort_level)
 {
-	if (!chunks)
-		return ;
-	if (stacks->b && chunks->right)
-		move_chunk_to_a(stacks, chunks->right->content);
-	else if (!stacks->b && ((t_chunk *)chunks->content)->size > 6)
-		move_chunk_to_b(stacks, chunks->left->content);
-	sort_chunk(stacks, chunks->left);
-	if (((t_chunk *)chunks->content)->size < 4)
-		sort(stacks, chunks->content);
-	sort_chunk(stacks, chunks->right);
+	(void)stacks;
+	if (!chunks || CHUNK(chunks)->level > sort_level)
+		return;
+	move_chunks_to_b(stacks, chunks->left, sort_level);
+	if (CHUNK(chunks)->level == sort_level)
+		move_chunk_to_b(stacks, CHUNK(chunks));
+	move_chunks_to_b(stacks, chunks->right, sort_level);
 }
+
+// static void sort_chunks_to_a(t_stacks *stacks, t_btree *chunks)
+// {
+
+// }
 
 void		sort_stack(t_stacks *stacks, int size)
 {
 	int	i;
+	int	sort_level;
 
 	i = 0;
 	if (check_order(stacks->a))
 		return ;
 	if (size < 6)
 		return (sort_small(stacks, size));
+	sort_level = 2;
+	if (size > 45)
+		sort_level = 3;
+	if (size > 200)
+		sort_level = 4;
+	if (size > 350)
+		sort_level = 5;
 	while (stacks->chunks[i])
 	{
-		sort_chunk(stacks, stacks->chunks[i]);
+		move_chunks_to_b(stacks, stacks->chunks[i], sort_level);
+		sort_to_a(stacks);
 		i++;
 	}
- //print_stacks(stacks);
+	//print_stacks(stacks);
 }

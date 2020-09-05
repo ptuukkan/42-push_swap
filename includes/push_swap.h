@@ -25,6 +25,7 @@
 # define ROOT(x) *(int *)x->content
 # define LEFT(x) *(int *)x->left->content
 # define RIGHT(x) *(int *)x->right->content
+# define CHUNK(x) ((t_chunk *)x->content)
 
 typedef struct		s_nbrs
 {
@@ -41,6 +42,7 @@ typedef struct		s_chunk
 	int	low;
 	int	high;
 	int	size;
+	int	level;
 }					t_chunk;
 
 typedef struct		s_stacks
@@ -88,6 +90,7 @@ int		in_chunk(int x, t_chunk *chunk);
 int		calc_chunk_moves(t_twlist *lst, t_chunk *chunk);
 int		find_nearest_in_chunk(t_twlist *lst, t_chunk *chunk);
 void	sort_chunk_to_a(t_stacks *stacks, t_chunk *chunk);
+void	sort_to_a(t_stacks *stacks);
 
 
 #endif

@@ -142,7 +142,7 @@ int	calc_chunk_moves(t_twlist *lst, t_chunk *chunk)
 	fwd = calc_forward(lst, chunk);
 	rev = calc_reverse(lst, chunk);
 	nearest = calc_nearest(lst, chunk);
-	ft_printf("fwd: %d, rev: %d, nearest: %d\n", fwd, rev, nearest);
+	//ft_printf("fwd: %d, rev: %d, nearest: %d\n", fwd, rev, nearest);
 	if (nearest < fwd && nearest < rev)
 		return (3);
 	if (rev < fwd && rev < nearest)

@@ -55,6 +55,6 @@ void		move_chunk_to_b(t_stacks *stacks, t_chunk *chunk)
 		move_nearest(stacks, chunk);
 	else
 	 	ft_exiterror("REVERSE NOT IMPLEMENTED", 1, 1);
-	ft_printf("%d - %d\n", chunk->low, chunk->high);
-	print_stacks(stacks);
+	//ft_printf("%d - %d\n", chunk->low, chunk->high);
+	//print_stacks(stacks);
 }
