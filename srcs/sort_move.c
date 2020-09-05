@@ -81,19 +81,19 @@ void	move_to_b(t_stacks *stacks, t_chunk *chunk)
 	{
 		while (position > 0)
 		{
-			rotate_a(stacks);
+			rotate_a(stacks, 1);
 			position--;
 		}
 		while (position < 0)
 		{
-			reverse_rotate_a(stacks);
+			reverse_rotate_a(stacks, -1);
 			position++;
 		}
 		push_b(stacks);
 		remaining--;
 	}
 	if (stacks->last_sorted)
-		prepare_a(stacks, *stacks->last_sorted);
+		prepare_a(stacks);
 }
 
 void	move_to_a(t_stacks *stacks, t_chunk *chunk)
@@ -107,15 +107,18 @@ void	move_to_a(t_stacks *stacks, t_chunk *chunk)
 	{
 		while (position > 0)
 		{
-			rotate_b(stacks);
+			rotate_b(stacks, 1);
 			position--;
 		}
 		while (position < 0)
 		{
-			reverse_rotate_b(stacks);
+			reverse_rotate_b(stacks, -1);
 			position++;
 		}
-		push_a(stacks);
+		if (chunk->size < 7)
+		 	push_a_sort(stacks, chunk, remaining);
+		else
+			push_a(stacks);
 		remaining--;
 	}
 }

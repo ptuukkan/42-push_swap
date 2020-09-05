@@ -57,9 +57,9 @@ static void	sort_chunk(t_stacks *stacks, t_btree *chunks)
 	if (!chunks)
 		return ;
 	if (stacks->b && chunks->right)
-		move_to_a(stacks, chunks->right->content);
-	else if (!stacks->b && chunks->left)
-		move_to_b(stacks, chunks->left->content);
+		move_chunk_to_a(stacks, chunks->right->content);
+	else if (!stacks->b && ((t_chunk *)chunks->content)->size > 6)
+		move_chunk_to_b(stacks, chunks->left->content);
 	sort_chunk(stacks, chunks->left);
 	if (((t_chunk *)chunks->content)->size < 4)
 		sort(stacks, chunks->content);
@@ -77,8 +77,8 @@ void		sort_stack(t_stacks *stacks, int size)
 		return (sort_small(stacks, size));
 	while (stacks->chunks[i])
 	{
-		move_to_b(stacks, stacks->chunks[i]->content);
 		sort_chunk(stacks, stacks->chunks[i]);
 		i++;
 	}
+ //print_stacks(stacks);
 }

@@ -47,17 +47,17 @@ int	exec_operation(char *op, t_stacks *stacks)
 	else if (ft_strequ(op, "pb"))
 		push_b(stacks);
 	else if (ft_strequ(op, "ra"))
-		rotate_a(stacks);
+		rotate_a(stacks, 1);
 	else if (ft_strequ(op, "ras"))
 		rotate_a_sorted(stacks);
 	else if (ft_strequ(op, "rb"))
-		rotate_b(stacks);
+		rotate_b(stacks, 1);
 	else if (ft_strequ(op, "rr"))
 		rotate_ab(stacks);
 	else if (ft_strequ(op, "rra"))
-		reverse_rotate_a(stacks);
+		reverse_rotate_a(stacks, -1);
 	else if (ft_strequ(op, "rrb"))
-		reverse_rotate_b(stacks);
+		reverse_rotate_b(stacks, -1);
 	else if (ft_strequ(op, "rrr"))
 		reverse_rotate_ab(stacks);
 	else

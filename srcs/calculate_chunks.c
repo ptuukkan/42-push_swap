@@ -56,7 +56,7 @@ t_btree		**calculate_chunks(int *numbers, int size)
 	// if (size > 90)
 	// 	num_chunks = 10;
 	// else
-	num_chunks = 2;
+	num_chunks = 1;
 	i = 0;
 	chunk_array = NULL;
 	if (!(chunk_array = (t_btree **)ft_memalloc(sizeof(t_btree *) * num_chunks + 1)))

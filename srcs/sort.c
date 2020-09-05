@@ -75,5 +75,9 @@ void	sort(t_stacks *stacks, t_chunk *chunk)
 	if (!stacks->b)
 		return (sort_a(stacks, chunk));
 	else
+	{
+		prepare_a(stacks);
 		return (sort_b(stacks, chunk));
+	}
+
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prepare.c                                          :+:      :+:    :+:   */
+/*   utilitiess.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ptuukkan <ptuukkan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,40 +12,33 @@
 
 #include "push_swap.h"
 
-static void	rotate(t_stacks *stacks, int moves, void (*f)(t_stacks *, int))
+int	in_chunk(int x, t_chunk *chunk)
 {
-	while (moves > 0)
-	{
-		(*f)(stacks, 1);
-		moves--;
-	}
-
+	if (x >= chunk->low && x <= chunk->high)
+		return (1);
+	return (0);
 }
 
-void		prepare_a(t_stacks *stacks)
+int	find_nearest_in_chunk(t_twlist *lst, t_chunk *chunk)
 {
 	int			fwd;
 	int			rev;
-	t_twlist	*a;
+	t_twlist	*tmp;
 
-	a = stacks->a;
 	fwd = 0;
 	rev = 0;
-	while ((stacks->last_sorted && PREV(a) != *stacks->last_sorted) ||
-			(!stacks->last_sorted && FIRST(a) > PREV(a)))
+	tmp = lst;
+	while (!in_chunk(FIRST(lst), chunk))
 	{
-		a = a->next;
 		fwd++;
+		lst = lst->next;
 	}
-	a = stacks->a;
-	while ((stacks->last_sorted && PREV(a) != *stacks->last_sorted) ||
-			(!stacks->last_sorted && FIRST(a) > PREV(a)))
+	while (!in_chunk(FIRST(tmp), chunk))
 	{
-		a = a->prev;
-		rev++;
+		rev--;
+		tmp = tmp->prev;
 	}
-	if (rev < fwd)
-		rotate(stacks, rev, &reverse_rotate_a);
-	else
-		rotate(stacks, fwd, &rotate_a);
+	if (-rev < fwd)
+		return (rev);
+	return (fwd);
 }

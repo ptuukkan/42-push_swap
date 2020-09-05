@@ -19,9 +19,9 @@ static void	sort_small_3(t_stacks *stacks, int a, int b, int c)
 		else if (a > b && a < c && b < c)
 			swap_a(stacks);
 		else if (a < b && a > c && b > c)
-			reverse_rotate_a(stacks);
+			reverse_rotate_a(stacks, -1);
 		else if (a > b && a > c && b < c)
-			rotate_a(stacks);
+			rotate_a(stacks, 1);
 		else if (a > b && a > c && b > c)
 			exec_operations(stacks, "ra\nsa\n");
 }
