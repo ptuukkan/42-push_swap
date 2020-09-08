@@ -44,64 +44,30 @@ static void	sort_b_3(t_stacks *stacks, int a, int b, int c)
 		exec_operations(stacks, "pa\npa\npa\nras\nras\nras\n");
 }
 
-static int		find_position_fwd(t_twlist *lst, int x, int max_moves)
-{
-	int	fwd;
-
-	fwd = 0;
-	while (fwd <= max_moves && !(FIRST(lst) > x && PREV(lst) < x))
-	{
-		fwd++;
-		lst = lst->next;
-	}
-	return (fwd);
-}
-
-static int		find_position_rev(t_twlist *lst, int x, int max_moves)
-{
-	int	rev;
-
-	rev = 0;
-	while (rev <= max_moves && !(FIRST(lst) > x && PREV(lst) < x))
-	{
-		lst = lst->prev;
-		rev++;
-	}
-	return (rev);
-}
-
 static int	find_position(t_twlist *lst, int x, int max_moves, t_chunk *chunk)
 {
-	int			fwd;
-	int			rev;
-	t_twlist	*tmp;
+	int			i;
 
 	if (max_moves == 0)
 		return (0);
-	fwd = find_position_fwd(lst, x, max_moves);
-	rev = find_position_rev(lst, x, max_moves);
-	tmp = lst;
-	if (fwd > max_moves && rev > max_moves)
+	i = 0;
+	if (x > FIRST(lst))
 	{
-		fwd = 0;
-		rev = 0;
-		while (in_chunk(PREV(lst), chunk) && x < FIRST(lst))
+		while (i < max_moves && x > FIRST(lst) && in_chunk(FIRST(lst), chunk))
 		{
-			rev++;
-			lst = lst->prev;
+			lst = lst->next;
+			i++;
 		}
-		while (in_chunk(SECOND(tmp), chunk) && x > FIRST(tmp))
-		{
-			fwd++;
-			tmp = tmp->next;
-		}
-		if (fwd == 0)
-			return (-rev);
-		return (fwd);
 	}
-	if (rev < fwd)
-	 	return (-rev);
-	return (fwd);
+	else
+	{
+		while (i < max_moves && x < FIRST(lst) && in_chunk(PREV(lst), chunk) && x < PREV(lst))
+		{
+			lst = lst->prev;
+			i--;
+		}
+	}
+	return (i);
 }
 
 static void	sort_b_n(t_stacks *stacks, t_chunk *chunk, int remaining)

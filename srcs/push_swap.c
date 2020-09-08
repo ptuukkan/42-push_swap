@@ -60,7 +60,7 @@ int		main(int argc, char **argv)
 	numbers = NULL;
 	stacks.chunks = NULL;
 	stacks.last_sorted = NULL;
-	stacks.debug = 1;
+	stacks.debug = 0;
 	if (argc == 1)
 		return (1);
 	if (!init_stack(argv + 1, &stacks.a))
