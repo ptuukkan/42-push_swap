@@ -65,6 +65,8 @@ int		main(int argc, char **argv)
 		return (1);
 	if (!init_stack(argv + 1, &stacks.a))
 		return (print_error());
+	// if (check_order(stacks.a))
+	// 	return (0);
 	size = ft_twlstcount(stacks.a);
 	if (!(numbers = init_array(stacks.a, size)))
 		return (print_error());

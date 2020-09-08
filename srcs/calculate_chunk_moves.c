@@ -70,26 +70,21 @@ static int	find_nearest(t_twlist *lst, t_chunk *chunk, t_list *found)
 	int			fwd;
 	int			rev;
 	t_twlist	*tmp;
-	int			f;
 
 	fwd = 0;
 	rev = 0;
 	tmp = lst;
-	f = 0;
-	while (!in_chunk(FIRST(lst), chunk) || (f = is_found(FIRST(lst), found)))
+	while (!in_chunk(FIRST(lst), chunk) || is_found(FIRST(lst), found))
 	{
-		//ft_printf("%d\n", FIRST(lst));
-		if (!f)
-			fwd++;
 		lst = lst->next;
+	 	if (!is_found(FIRST(lst), found))
+			fwd++;
 	}
-	f = 0;
-	while (!in_chunk(FIRST(tmp), chunk) || (f = is_found(FIRST(tmp), found)))
+	while (!in_chunk(FIRST(tmp), chunk) || is_found(FIRST(tmp), found))
 	{
-		//ft_printf("%d\n", FIRST(tmp));
-		if (!f)
-			rev--;
 		tmp = tmp->prev;
+	 	if (!is_found(FIRST(tmp), found))
+			rev--;
 	}
 	if (-rev < fwd)
 		return (rev);
@@ -115,15 +110,15 @@ static int	calc_nearest(t_twlist *lst, t_chunk *chunk)
 			moves += -nearest;
 		while (nearest > 0)
 		{
+			lst = lst->next;
 			if (!is_found(FIRST(lst), found))
 				nearest--;
-			lst = lst->next;
 		}
 		while (nearest < 0)
 		{
+			lst = lst->prev;
 			if (!is_found(FIRST(lst), found))
 				nearest++;
-			lst = lst->prev;
 		}
 		moves++;
 		ft_lstapp(&found, ft_lstnew(lst->content, lst->content_size));
