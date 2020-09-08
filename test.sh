@@ -32,62 +32,27 @@ test()
 		fi
 		i=$(( $i + 1 ))
 	done
+	TESTS=$(( 100 - $FAILED))
+	AVG=$(( $TOTAL / $TESTS ))
+	printf "%3d: %d of %d OK, average: %4d best: %4d worst: %4d\n" "$1" "$TESTS" "100" "$AVG" "$BEST" "$WORST"
 }
 
 test "1"
-TESTS=$(( 100 - $FAILED))
-AVG=$(( $TOTAL / $TESTS ))
-printf "1: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "100" "$AVG" "$BEST" "$WORST"
-
 test "2"
-TESTS=$(( 100 - $FAILED))
-AVG=$(( $TOTAL / $TESTS ))
-printf "2: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "100" "$AVG" "$BEST" "$WORST"
-
 test "3"
-TESTS=$(( 100 - $FAILED))
-AVG=$(( $TOTAL / $TESTS ))
-printf "3: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "100" "$AVG" "$BEST" "$WORST"
-
 test "4"
-TESTS=$(( 100 - $FAILED))
-AVG=$(( $TOTAL / $TESTS ))
-printf "4: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "100" "$AVG" "$BEST" "$WORST"
-
 test "5"
-TESTS=$(( 100 - $FAILED))
-AVG=$(( $TOTAL / $TESTS ))
-printf "5: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "100" "$AVG" "$BEST" "$WORST"
-
 test "6"
-TESTS=$(( 100 - $FAILED))
-AVG=$(( $TOTAL / $TESTS ))
-printf "6: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "100" "$AVG" "$BEST" "$WORST"
-
+test "7"
+test "8"
+test "9"
 test "10"
-TESTS=$(( 100 - $FAILED))
-AVG=$(( $TOTAL / $TESTS ))
-printf "10: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "100" "$AVG" "$BEST" "$WORST"
-
+test "11"
+test "12"
+test "13"
+test "14"
+test "15"
 test "20"
-TESTS=$(( 100 - $FAILED))
-AVG=$(( $TOTAL / $TESTS ))
-printf "20: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "100" "$AVG" "$BEST" "$WORST"
-
 test "50"
-TESTS=$(( 100 - $FAILED))
-AVG=$(( $TOTAL / $TESTS ))
-printf "50: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "100" "$AVG" "$BEST" "$WORST"
-
 test "100"
-TESTS=$(( 100 - $FAILED))
-AVG=$(( $TOTAL / $TESTS ))
-printf "100: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "100" "$AVG" "$BEST" "$WORST"
-
 test "500"
-TESTS=$(( 100 - $FAILED))
-AVG=$(( $TOTAL / $TESTS ))
-printf "500: %d of %d OK, average: %d best: %d worst: %d\n" "$TESTS" "100" "$AVG" "$BEST" "$WORST"
-
-
-
