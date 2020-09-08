@@ -12,7 +12,6 @@
 
 #include "push_swap.h"
 
-
 static void	move_forward(t_stacks *stacks, t_chunk *chunk)
 {
 	int	remaining;
@@ -26,7 +25,6 @@ static void	move_forward(t_stacks *stacks, t_chunk *chunk)
 		remaining--;
 	}
 }
-
 
 static void	move_nearest(t_stacks *stacks, t_chunk *chunk)
 {
@@ -44,13 +42,12 @@ static void	move_nearest(t_stacks *stacks, t_chunk *chunk)
 	}
 }
 
-
 void		move_chunk_to_a(t_stacks *stacks, t_chunk *chunk)
 {
 	int	mode;
 
-	if (chunk->size < 7)
-		return (sort_chunk_to_a(stacks, chunk));
+	// if (chunk->size < 7)
+	// 	return (sort_chunk_to_a(stacks, chunk));
 	mode = calc_chunk_moves(stacks->b, chunk);
 	if (mode == 1)
 		move_forward(stacks, chunk);
@@ -58,6 +55,6 @@ void		move_chunk_to_a(t_stacks *stacks, t_chunk *chunk)
 		move_nearest(stacks, chunk);
 	else
 		ft_exiterror("REVERSE NOT IMPLEMENTED", 1, 1);
-	ft_printf("%d - %d\n", chunk->low, chunk->high);
+	//ft_printf("%d - %d\n", chunk->low, chunk->high);
 	print_stacks(stacks);
 }

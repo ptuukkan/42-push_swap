@@ -12,7 +12,6 @@
 
 #include "push_swap.h"
 
-
 static void	move_forward(t_stacks *stacks, t_chunk *chunk)
 {
 	int	remaining;
@@ -26,7 +25,6 @@ static void	move_forward(t_stacks *stacks, t_chunk *chunk)
 		remaining--;
 	}
 }
-
 
 static void	move_nearest(t_stacks *stacks, t_chunk *chunk)
 {
@@ -43,7 +41,6 @@ static void	move_nearest(t_stacks *stacks, t_chunk *chunk)
 		remaining--;
 	}
 }
-
 
 void		move_chunk_to_b(t_stacks *stacks, t_chunk *chunk)
 {

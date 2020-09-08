@@ -14,6 +14,8 @@
 
 void	print_stacks(t_stacks *stacks)
 {
+	if (!stacks->debug)
+		return ;
 	int			size_a = ft_twlstcount(stacks->a);
 	int			size_b = ft_twlstcount(stacks->b);
 	t_twlist	*lst_a = stacks->a;
@@ -52,44 +54,36 @@ void	print_numbers(t_list *numbers)
 	ft_printf("\n");
 }
 
-static void	move_chunks_to_b(t_stacks *stacks, t_btree *chunks, int sort_level)
+static void	stack_quicksort(t_stacks *stacks, t_btree *chunks, int size)
 {
-	(void)stacks;
-	if (!chunks || CHUNK(chunks)->level > sort_level)
-		return;
-	move_chunks_to_b(stacks, chunks->left, sort_level);
-	if (CHUNK(chunks)->level == sort_level)
+	if (!chunks)
+		return ;
+	if (!stacks->b && (chunks->left || size < 12))
+	{
 		move_chunk_to_b(stacks, CHUNK(chunks));
-	move_chunks_to_b(stacks, chunks->right, sort_level);
+		print_stacks(stacks);
+	}
+	if (stacks->b && chunks->right)
+	{
+		move_chunk_to_a(stacks, CHUNK(chunks->right));
+		print_stacks(stacks);
+	}
+	stack_quicksort(stacks, chunks->left, size);
+	if (!chunks->left)
+	{
+		sort_chunk(stacks, CHUNK(chunks));
+		print_stacks(stacks);
+	}
+	stack_quicksort(stacks, chunks->right, size);
 }
-
-// static void sort_chunks_to_a(t_stacks *stacks, t_btree *chunks)
-// {
-
-// }
 
 void		sort_stack(t_stacks *stacks, int size)
 {
-	int	i;
-	int	sort_level;
-
-	i = 0;
-	if (check_order(stacks->a))
-		return ;
 	if (size < 6)
 		return (sort_small(stacks, size));
-	sort_level = 2;
-	if (size > 45)
-		sort_level = 3;
-	if (size > 200)
-		sort_level = 4;
-	if (size > 350)
-		sort_level = 5;
-	while (stacks->chunks[i])
-	{
-		move_chunks_to_b(stacks, stacks->chunks[i], sort_level);
-		sort_to_a(stacks);
-		i++;
-	}
-	//print_stacks(stacks);
+	print_stacks(stacks);
+	stack_quicksort(stacks, stacks->chunks->left, size);
+	print_stacks(stacks);
+	stack_quicksort(stacks, stacks->chunks->right, size);
+	print_stacks(stacks);
 }
