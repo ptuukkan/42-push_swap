@@ -48,8 +48,6 @@ int	exec_operation(char *op, t_stacks *stacks)
 		push_b(stacks);
 	else if (ft_strequ(op, "ra"))
 		rotate_a(stacks, 1);
-	else if (ft_strequ(op, "ras"))
-		rotate_a_sorted(stacks);
 	else if (ft_strequ(op, "rb"))
 		rotate_b(stacks, 1);
 	else if (ft_strequ(op, "rr"))

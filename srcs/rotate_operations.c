@@ -27,12 +27,6 @@ void	rotate_a(t_stacks *stacks, int times)
 
 }
 
-void	rotate_a_sorted(t_stacks *stacks)
-{
-	new_last_sorted(stacks, FIRST(stacks->a));
-	rotate_a(stacks, 1);
-}
-
 void	rotate_b(t_stacks *stacks, int times)
 {
 	if (stacks->b == NULL || stacks->b->next == NULL)

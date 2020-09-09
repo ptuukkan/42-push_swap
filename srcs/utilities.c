@@ -50,3 +50,27 @@ int	find_nearest_in_chunk(t_twlist *lst, t_chunk *chunk)
 		return (rev);
 	return (fwd);
 }
+
+int	find_x(t_twlist *lst, int x)
+{
+	int			fwd;
+	int			rev;
+	t_twlist	*tmp;
+
+	fwd = 0;
+	rev = 0;
+	tmp = lst;
+	while (FIRST(lst) != x)
+	{
+		fwd++;
+		lst = lst->next;
+	}
+	while (FIRST(tmp) != x)
+	{
+		rev--;
+		tmp = tmp->prev;
+	}
+	if (-rev < fwd)
+		return (rev);
+	return (fwd);
+}

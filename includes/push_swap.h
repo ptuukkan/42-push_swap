@@ -62,7 +62,6 @@ void	swap_ab(t_stacks *stacks);
 void	push_a(t_stacks *stacks);
 void	push_b(t_stacks *stacks);
 void	rotate_a(t_stacks *stacks, int times);
-void	rotate_a_sorted(t_stacks *stacks);
 void	rotate_b(t_stacks *stacks, int times);
 void	rotate_ab(t_stacks *stacks);
 void	reverse_rotate_a(t_stacks *stacks, int times);
@@ -87,6 +86,7 @@ int		in_chunk(int x, t_chunk *chunk);
 int		calc_chunk_moves(t_twlist *lst, t_chunk *chunk);
 int		find_nearest_in_chunk(t_twlist *lst, t_chunk *chunk);
 void	new_last_sorted(t_stacks *stacks, int x);
+int		find_x(t_twlist *lst, int x);
 
 
 #endif

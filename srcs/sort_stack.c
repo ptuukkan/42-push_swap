@@ -58,12 +58,12 @@ static void	stack_quicksort(t_stacks *stacks, t_btree *chunks, int size)
 {
 	if (!chunks)
 		return ;
-	if (!stacks->b && (chunks->left || size < 12))
+	if (!stacks->b && (chunks->left))
 	{
-		move_chunk_to_b(stacks, CHUNK(chunks));
+		move_chunk_to_b(stacks, CHUNK(chunks->left));
 		print_stacks(stacks);
 	}
-	if (stacks->b && chunks->right)
+	else if (stacks->b && chunks->right)
 	{
 		move_chunk_to_a(stacks, CHUNK(chunks->right));
 		print_stacks(stacks);
@@ -82,8 +82,6 @@ void		sort_stack(t_stacks *stacks, int size)
 	if (size < 6)
 		return (sort_small(stacks, size));
 	print_stacks(stacks);
-	stack_quicksort(stacks, stacks->chunks->left, size);
-	print_stacks(stacks);
-	stack_quicksort(stacks, stacks->chunks->right, size);
+	stack_quicksort(stacks, stacks->chunks, size);
 	print_stacks(stacks);
 }
