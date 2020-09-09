@@ -42,7 +42,6 @@ typedef struct		s_chunk
 	int	low;
 	int	high;
 	int	size;
-	int	level;
 }					t_chunk;
 
 typedef struct		s_stacks

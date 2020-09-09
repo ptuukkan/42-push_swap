@@ -105,6 +105,9 @@ static void	sort_b(t_stacks *stacks, t_chunk *chunk)
 
 static void	sort_a(t_stacks *stacks, t_chunk *chunk)
 {
+	int	i;
+
+	i = 0;
 	if (chunk->size == 1)
 		exec_operations(stacks, "ra\n");
 	else if (chunk->size == 2 && FIRST(stacks->a) < SECOND(stacks->a))
@@ -114,19 +117,16 @@ static void	sort_a(t_stacks *stacks, t_chunk *chunk)
 	else if (chunk->size == 3)
 		return sort_a_3(stacks, FIRST(stacks->a), SECOND(stacks->a),
 				THIRD(stacks->a));
-	else if (chunk->size == 4)
+	else
 	{
-		exec_operations(stacks, "pb\npb");
+		while (i + 2 < chunk->size)
+		{
+			push_b(stacks);
+			i++;
+		}
 		if (FIRST(stacks->a) > SECOND(stacks->a))
 			swap_a(stacks);
-		sort_b_n(stacks, chunk, 2);
-	}
-	else if (chunk->size == 5)
-	{
-		exec_operations(stacks, "pb\npb\npb\n");
-		if (FIRST(stacks->a) > SECOND(stacks->a))
-			swap_a(stacks);
-		sort_b_n(stacks, chunk, 3);
+		sort_b_n(stacks, chunk, i);
 	}
 }
 

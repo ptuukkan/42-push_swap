@@ -5,7 +5,7 @@ test()
 	i=0
 	FAILED=0
 	TOTAL=0
-	while [ $i -lt 1000 ]
+	while [ $i -lt 100 ]
 	do
 		ARG=$(./nbgen.pl $1 2000)
 		RES=$(./push_swap $ARG | ./checker $ARG)
@@ -32,9 +32,9 @@ test()
 		fi
 		i=$(( $i + 1 ))
 	done
-	TESTS=$(( 1000 - $FAILED))
+	TESTS=$(( 100 - $FAILED))
 	AVG=$(( $TOTAL / $TESTS ))
-	printf "%3d: %d of %d OK, average: %4d best: %4d worst: %4d\n" "$1" "$TESTS" "1000" "$AVG" "$BEST" "$WORST"
+	printf "%3d: %d of %d OK, average: %4d best: %4d worst: %4d\n" "$1" "$TESTS" "100" "$AVG" "$BEST" "$WORST"
 }
 
 test "1"
