@@ -24,7 +24,6 @@ void	reverse_rotate_a(t_stacks *stacks, int times)
 		append_op(&stacks->oplist, "rra\n");
 		times++;
 	}
-
 }
 
 void	reverse_rotate_b(t_stacks *stacks, int times)

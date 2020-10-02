@@ -17,7 +17,7 @@ void	push_a(t_stacks *stacks)
 	t_twlist	*temp;
 
 	if (stacks->b == NULL)
-		return;
+		return ;
 	temp = ft_twlstdetach(&stacks->b);
 	ft_twlstadd(&stacks->a, temp);
 	append_op(&stacks->oplist, "pa\n");
@@ -28,7 +28,7 @@ void	push_b(t_stacks *stacks)
 	t_twlist	*temp;
 
 	if (stacks->a == NULL)
-		return;
+		return ;
 	temp = ft_twlstdetach(&stacks->a);
 	ft_twlstadd(&stacks->b, temp);
 	append_op(&stacks->oplist, "pb\n");

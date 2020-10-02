@@ -20,11 +20,7 @@
 # define FIRST(x) *(int *)x->content
 # define SECOND(x) *(int *)x->next->content
 # define THIRD(x) *(int *)x->next->next->content
-# define FOURTH(x) *(int *)x->next->next->next->content
 # define PREV(x) *(int *)x->prev->content
-# define ROOT(x) *(int *)x->content
-# define LEFT(x) *(int *)x->left->content
-# define RIGHT(x) *(int *)x->right->content
 # define CHUNK(x) ((t_chunk *)x->content)
 
 typedef struct		s_nbrs
@@ -51,7 +47,6 @@ typedef struct		s_stacks
 	t_twlist	*oplist;
 	t_btree		*chunks;
 	int			*last_sorted;
-	int			debug : 1;
 }					t_stacks;
 
 int		init_stack(char **argv, t_twlist **stack_a);
@@ -69,12 +64,9 @@ void	reverse_rotate_ab(t_stacks *stacks);
 int		check_order(t_twlist *stack);
 int		exec_operation(char *instruction, t_stacks *stacks);
 int		print_error(void);
-void	print_operations(t_twlist *operations);
-void	print_stack(t_twlist *stack);
 void	exec_operations(t_stacks *stacks, char *ops);
-void	print_stacks(t_stacks *stacks);
 void	sort_chunk(t_stacks *stacks, t_chunk *chunk);
-void	sort_small(t_stacks *stacks, int size);
+void	sort_small(t_stacks *stacks, t_chunk *chunk);
 void	sort_stack(t_stacks *stacks, int size);
 void	append_op(t_twlist **oplist, char *op);
 int		*init_array(t_twlist *lst, int size);
@@ -86,6 +78,7 @@ int		calc_chunk_moves(t_twlist *lst, t_chunk *chunk);
 int		find_nearest_in_chunk(t_twlist *lst, t_chunk *chunk);
 void	new_last_sorted(t_stacks *stacks, int x);
 int		find_x(t_twlist *lst, int x);
-
+void	sort_b_n(t_stacks *stacks, t_chunk *chunk, int remaining);
+void	sort_a(t_stacks *stacks, t_chunk *chunk);
 
 #endif

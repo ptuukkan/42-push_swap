@@ -14,123 +14,99 @@
 
 static void	sort_small_3(t_stacks *stacks, int a, int b, int c)
 {
-		if (a < b && a < c && b > c)
-			exec_operations(stacks, "rra\nsa\n");
-		else if (a > b && a < c && b < c)
-			swap_a(stacks);
-		else if (a < b && a > c && b > c)
-			reverse_rotate_a(stacks, -1);
-		else if (a > b && a > c && b < c)
-			rotate_a(stacks, 1);
-		else if (a > b && a > c && b > c)
-			exec_operations(stacks, "ra\nsa\n");
+	if (a < b && a < c && b > c)
+		exec_operations(stacks, "rra\nsa\n");
+	else if (a > b && a < c && b < c)
+		swap_a(stacks);
+	else if (a < b && a > c && b > c)
+		reverse_rotate_a(stacks, -1);
+	else if (a > b && a > c && b < c)
+		rotate_a(stacks, 1);
+	else if (a > b && a > c && b > c)
+		exec_operations(stacks, "ra\nsa\n");
 }
 
-static int	get_position(t_twlist *lst, int x, int low, int high)
+static int	edge_position(t_twlist *lst)
 {
-	int	i;
-	int	size;
+	int			fwd;
+	int			rev;
+	t_twlist	*tmp;
 
-	i = 0;
-	size = ft_twlstcount(lst);
-	if (x > high || x < low)
+	fwd = 0;
+	rev = 0;
+	tmp = lst;
+	while (FIRST(lst) > PREV(lst))
 	{
-		while (FIRST(lst) > PREV(lst))
-		{
-			i++;
-			lst = lst->next;
-		}
+		fwd++;
+		lst = lst->next;
 	}
-	else
+	while (FIRST(tmp) > PREV(tmp))
 	{
-		while (!(PREV(lst) < x && FIRST(lst) > x))
-		{
-			i++;
-			lst = lst->next;
-		}
+		rev--;
+		tmp = tmp->prev;
 	}
-	if (i == 2 && size == 3)
-		return (-1);
-	return (i);
+	if (-rev < fwd)
+		return (rev);
+	return (fwd);
 }
 
-static void	finish_rotate(t_stacks *stacks)
+static int	find_position(t_twlist *lst, int x, int max_moves)
 {
 	int			i;
-	t_twlist	*lst;
-	int			size;
 
+	if (max_moves == 0)
+		return (0);
 	i = 0;
-	lst = stacks->a;
-	size = ft_twlstcount(stacks->a);
-	while (FIRST(lst) > *(int *)lst->prev->content)
+	while (i < max_moves && !(FIRST(lst) > x && PREV(lst) < x))
 	{
 		lst = lst->next;
 		i++;
 	}
-	if (i >= 3)
-		i = -(size - i);
-	while (i > 0)
-	{
-		exec_operations(stacks, "ra\n");
-		i--;
-	}
-	while (i < 0)
-	{
-		exec_operations(stacks, "rra\n");
-		i++;
-	}
+	if (i == max_moves)
+		return (edge_position(lst));
+	if (max_moves - i < i)
+		return (-(max_moves - i));
+	return (i);
 }
 
-static void	return_b(t_stacks *stacks)
+static void	return_b(t_stacks *stacks, t_chunk *chunk, int remaining)
 {
 	int	position;
-	int	low;
-	int	high;
+	int	head;
 
-	low = FIRST(stacks->a);
-	high = PREV(stacks->a);
-	while (stacks->b)
+	while (remaining > 0)
 	{
-		position = get_position(stacks->a, FIRST(stacks->b), low, high);
-		while (position > 0)
-		{
-			exec_operations(stacks, "ra\n");
-			position--;
-		}
-		while (position < 0)
-		{
-			exec_operations(stacks, "rra\n");
-			position++;
-		}
-		exec_operations(stacks, "pa\n");
-		if (FIRST(stacks->a) < low)
-			low = FIRST(stacks->a);
-		else if (FIRST(stacks->a) > high)
-			high = FIRST(stacks->a);
+		position = find_position(stacks->a, FIRST(stacks->b),
+					chunk->size - remaining);
+		rotate_a(stacks, position);
+		reverse_rotate_a(stacks, position);
+		push_a(stacks);
+		remaining--;
 	}
-	finish_rotate(stacks);
+	head = find_x(stacks->a, chunk->low);
+	rotate_a(stacks, head);
+	reverse_rotate_a(stacks, head);
 }
 
-void		sort_small(t_stacks *stacks, int size)
+void		sort_small(t_stacks *stacks, t_chunk *chunk)
 {
-	if (size == 2 && FIRST(stacks->a) > SECOND(stacks->a))
-		exec_operations(stacks, "sa\n");
-	else if (size == 3)
+	if (chunk->size == 2 && FIRST(stacks->a) > SECOND(stacks->a))
+		swap_a(stacks);
+	else if (chunk->size == 3)
 		return (sort_small_3(stacks, FIRST(stacks->a), SECOND(stacks->a),
 			THIRD(stacks->a)));
-	else if (size == 4)
+	else if (chunk->size == 4)
 	{
-		exec_operations(stacks, "pb\n");
+		push_b(stacks);
 		sort_small_3(stacks, FIRST(stacks->a), SECOND(stacks->a),
 			THIRD(stacks->a));
-		return_b(stacks);
+		return_b(stacks, chunk, 1);
 	}
-	else if (size == 5)
+	else
 	{
 		exec_operations(stacks, "pb\npb\n");
 		sort_small_3(stacks, FIRST(stacks->a), SECOND(stacks->a),
 			THIRD(stacks->a));
-		return_b(stacks);
+		return_b(stacks, chunk, 2);
 	}
 }

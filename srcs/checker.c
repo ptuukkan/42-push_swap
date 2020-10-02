@@ -11,23 +11,6 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-
-
-void		print_stack(t_twlist *stack)
-{
-	int	nb;
-
-	while (stack)
-	{
-		nb = *(int *)stack->content;
-		printf("%d\n", nb);
-		stack = stack->next;
-	}
-}
 
 int			main(int argc, char **argv)
 {

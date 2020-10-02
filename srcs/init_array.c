@@ -36,7 +36,7 @@ static void	swap(int *a, int *b)
 	*b = temp;
 }
 
-static void sort_array(int *array, int size)
+static void	sort_array(int *array, int size)
 {
 	int	pivot;
 	int	begin;

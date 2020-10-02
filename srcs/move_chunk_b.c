@@ -44,16 +44,12 @@ static void	move_nearest(t_stacks *stacks, t_chunk *chunk)
 
 void		move_chunk_to_b(t_stacks *stacks, t_chunk *chunk)
 {
-	int	mode;
 	int	last_sort_pos;
 
-	mode = calc_chunk_moves(stacks->a, chunk);
-	if (mode == 1)
-		move_forward(stacks, chunk);
-	else if (mode == 3)
+	if (calc_chunk_moves(stacks->a, chunk))
 		move_nearest(stacks, chunk);
 	else
-	 	ft_exiterror("REVERSE NOT IMPLEMENTED", 1, 1);
+		move_forward(stacks, chunk);
 	if (stacks->last_sorted)
 	{
 		last_sort_pos = find_x(stacks->a, *stacks->last_sorted);
@@ -62,6 +58,4 @@ void		move_chunk_to_b(t_stacks *stacks, t_chunk *chunk)
 		else
 			reverse_rotate_a(stacks, last_sort_pos + 1);
 	}
-	//ft_printf("%d - %d\n", chunk->low, chunk->high);
-	//print_stacks(stacks);
 }

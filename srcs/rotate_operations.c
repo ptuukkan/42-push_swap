@@ -24,7 +24,6 @@ void	rotate_a(t_stacks *stacks, int times)
 		append_op(&stacks->oplist, "ra\n");
 		times--;
 	}
-
 }
 
 void	rotate_b(t_stacks *stacks, int times)
@@ -39,7 +38,6 @@ void	rotate_b(t_stacks *stacks, int times)
 		append_op(&stacks->oplist, "rb\n");
 		times--;
 	}
-
 }
 
 void	rotate_ab(t_stacks *stacks)

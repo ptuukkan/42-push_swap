@@ -30,24 +30,22 @@ static t_btree	*new_chunk(int low, int high, int size)
 	return (node);
 }
 
-static t_btree	*calculate_chunk(int *numbers, t_btree *chunks, int size, int chunk_threshold)
+static t_btree	*calculate_chunk(int *numbers, t_btree *chunks,
+								int size, int chunk_threshold)
 {
 	if (!(chunks = new_chunk(numbers[0], numbers[size - 1], size - 0)))
 		ft_exiterror("error", 1, 2);
 	if (size > chunk_threshold)
 	{
-		chunks->left = calculate_chunk(numbers, chunks->left, size / 2, chunk_threshold);
-		chunks->right = calculate_chunk(numbers + (size / 2), chunks->right, size - (size / 2), chunk_threshold);
+		chunks->left = calculate_chunk(numbers, chunks->left,
+									size / 2, chunk_threshold);
+		chunks->right = calculate_chunk(numbers + (size / 2),
+						chunks->right, size - (size / 2), chunk_threshold);
 	}
 	return (chunks);
 }
 
-void		print_chunks(void *content)
-{
-	ft_printf("%d - %d\n", ((t_chunk *)content)->low, ((t_chunk *)content)->high);
-}
-
-t_btree		*calculate_chunks(int *numbers, int size)
+t_btree			*calculate_chunks(int *numbers, int size)
 {
 	t_btree	*chunks;
 	int		chunk_threshold;
@@ -57,6 +55,6 @@ t_btree		*calculate_chunks(int *numbers, int size)
 	else
 		chunk_threshold = 10;
 	chunks = NULL;
-	chunks = calculate_chunk(numbers , chunks, size, chunk_threshold);
+	chunks = calculate_chunk(numbers, chunks, size, chunk_threshold);
 	return (chunks);
 }

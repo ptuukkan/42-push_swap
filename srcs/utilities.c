@@ -12,7 +12,13 @@
 
 #include "push_swap.h"
 
-int	in_chunk(int x, t_chunk *chunk)
+int		print_error(void)
+{
+	ft_putstr("Error\n");
+	return (-1);
+}
+
+int		in_chunk(int x, t_chunk *chunk)
 {
 	if (x >= chunk->low && x <= chunk->high)
 		return (1);
@@ -27,7 +33,7 @@ void	new_last_sorted(t_stacks *stacks, int x)
 		ft_memcpy(stacks->last_sorted, &x, stacks->a->content_size);
 }
 
-int	find_nearest_in_chunk(t_twlist *lst, t_chunk *chunk)
+int		find_nearest_in_chunk(t_twlist *lst, t_chunk *chunk)
 {
 	int			fwd;
 	int			rev;
@@ -51,7 +57,7 @@ int	find_nearest_in_chunk(t_twlist *lst, t_chunk *chunk)
 	return (fwd);
 }
 
-int	find_x(t_twlist *lst, int x)
+int		find_x(t_twlist *lst, int x)
 {
 	int			fwd;
 	int			rev;

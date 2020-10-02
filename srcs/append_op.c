@@ -51,7 +51,7 @@ static void	replace(t_twlist *lst, char *last_op, char *new_op)
 	}
 }
 
-void	append_op(t_twlist **oplist, char *op)
+void		append_op(t_twlist **oplist, char *op)
 {
 	t_twlist	*tmp;
 	int			result;

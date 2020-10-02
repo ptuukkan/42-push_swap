@@ -12,13 +12,7 @@
 
 #include "push_swap.h"
 
-int	print_error(void)
-{
-	ft_putstr("Error\n");
-	return (-1);
-}
-
-int	check_order(t_twlist *stack)
+int		check_order(t_twlist *stack)
 {
 	int	nb1;
 	int	nb2;
@@ -34,7 +28,7 @@ int	check_order(t_twlist *stack)
 	return (1);
 }
 
-int	exec_operation(char *op, t_stacks *stacks)
+int		exec_operation(char *op, t_stacks *stacks)
 {
 	if (ft_strequ(op, "sa"))
 		swap_a(stacks);

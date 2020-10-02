@@ -29,7 +29,7 @@ static int	check_digits(char *str)
 {
 	if (*str == '-')
 		str++;
-	while(*str)
+	while (*str)
 	{
 		if (!ft_isdigit(*str))
 			return (0);
