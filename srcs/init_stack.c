@@ -16,7 +16,7 @@ static int	duplicate_number(t_twlist *stack_a, int nb)
 {
 	while (stack_a)
 	{
-		if (nb == FIRST(stack_a))
+		if (nb == first(stack_a))
 			return (1);
 		if (stack_a->end)
 			break ;

@@ -35,16 +35,16 @@ static int	calculate_moves(t_twlist *lst, t_chunk *chunk, int hold)
 
 	ret1 = 0;
 	ret2 = 0;
-	if (!in_chunk(FIRST(lst), chunk))
+	if (!in_chunk(first(lst), chunk))
 		return (0);
-	if (FIRST(lst) < hold)
+	if (first(lst) < hold)
 	{
 		return (1 + calculate_moves(lst->next, chunk, hold));
 	}
 	else
 	{
 		ret1 = calculate_moves(lst->next, chunk, hold);
-		ret2 = calculate_moves(lst->next, chunk, FIRST(lst));
+		ret2 = calculate_moves(lst->next, chunk, first(lst));
 		if (ret2 <= ret1)
 			return (ret2);
 		return (1 + ret1);
@@ -62,9 +62,9 @@ static int	calculate_hold(t_twlist *lst, t_chunk *chunk)
 	selected = 0;
 	selected_moves = INT32_MAX;
 	current_moves = 0;
-	while (in_chunk(FIRST(lst), chunk))
+	while (in_chunk(first(lst), chunk))
 	{
-		current_moves = calculate_moves(lst, chunk, FIRST(lst));
+		current_moves = calculate_moves(lst, chunk, first(lst));
 		if (current_moves + i < selected_moves)
 		{
 			selected_moves = current_moves + i;
@@ -83,24 +83,24 @@ static void	sort_a_n(t_stacks *stacks, t_chunk *chunk, int i)
 	i = calculate_hold(stacks->a, chunk);
 	while (i-- > 0)
 		push_b(stacks);
-	hold = FIRST(stacks->a);
-	while (in_chunk(FIRST(stacks->a), chunk))
+	hold = first(stacks->a);
+	while (in_chunk(first(stacks->a), chunk))
 	{
-		if (FIRST(stacks->a) < hold)
+		if (first(stacks->a) < hold)
 			push_b(stacks);
 		else
 		{
 			if (calculate_moves(stacks->a->next, chunk, hold) <
-				calculate_moves(stacks->a->next, chunk, FIRST(stacks->a)))
+				calculate_moves(stacks->a->next, chunk, first(stacks->a)))
 				push_b(stacks);
 			else
 			{
-				hold = FIRST(stacks->a);
+				hold = first(stacks->a);
 				rotate_a(stacks, 1);
 			}
 		}
 	}
-	if (!in_chunk(FIRST(stacks->a), chunk) && in_chunk(PREV(stacks->a), chunk))
+	if (!in_chunk(first(stacks->a), chunk) && in_chunk(prev(stacks->a), chunk))
 		reverse_rotate_a(stacks, -1);
 	sort_b_n(stacks, chunk, ft_twlstcount(stacks->b));
 }
@@ -109,13 +109,13 @@ void		sort_a(t_stacks *stacks, t_chunk *chunk)
 {
 	if (chunk->size == 1)
 		exec_operations(stacks, "ra\n");
-	else if (chunk->size == 2 && FIRST(stacks->a) < SECOND(stacks->a))
+	else if (chunk->size == 2 && first(stacks->a) < second(stacks->a))
 		exec_operations(stacks, "ra\nra\n");
 	else if (chunk->size == 2)
 		exec_operations(stacks, "sa\nra\nra\n");
 	else if (chunk->size == 3)
-		return (sort_a_3(stacks, FIRST(stacks->a), SECOND(stacks->a),
-				THIRD(stacks->a)));
+		return (sort_a_3(stacks, first(stacks->a), second(stacks->a),
+				third(stacks->a)));
 	else
 		return (sort_a_n(stacks, chunk, 0));
 }

@@ -42,12 +42,12 @@ int		find_nearest_in_chunk(t_twlist *lst, t_chunk *chunk)
 	fwd = 0;
 	rev = 0;
 	tmp = lst;
-	while (!in_chunk(FIRST(lst), chunk))
+	while (!in_chunk(first(lst), chunk))
 	{
 		fwd++;
 		lst = lst->next;
 	}
-	while (!in_chunk(FIRST(tmp), chunk))
+	while (!in_chunk(first(tmp), chunk))
 	{
 		rev--;
 		tmp = tmp->prev;
@@ -66,12 +66,12 @@ int		find_x(t_twlist *lst, int x)
 	fwd = 0;
 	rev = 0;
 	tmp = lst;
-	while (FIRST(lst) != x)
+	while (first(lst) != x)
 	{
 		fwd++;
 		lst = lst->next;
 	}
-	while (FIRST(tmp) != x)
+	while (first(tmp) != x)
 	{
 		rev--;
 		tmp = tmp->prev;

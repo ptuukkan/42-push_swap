@@ -19,7 +19,7 @@ static void	populate_array(int *numbers, t_twlist *lst)
 	i = 0;
 	while (lst)
 	{
-		numbers[i] = FIRST(lst);
+		numbers[i] = first(lst);
 		if (lst->end)
 			break ;
 		lst = lst->next;

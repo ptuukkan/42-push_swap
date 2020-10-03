@@ -19,8 +19,8 @@ int		check_order(t_twlist *stack)
 
 	while (stack->end == 0)
 	{
-		nb1 = FIRST(stack);
-		nb2 = SECOND(stack);
+		nb1 = first(stack);
+		nb2 = second(stack);
 		if (nb1 > nb2)
 			return (0);
 		stack = stack->next;

@@ -19,7 +19,7 @@ static void	move_forward(t_stacks *stacks, t_chunk *chunk)
 	remaining = chunk->size;
 	while (remaining)
 	{
-		while (!in_chunk(FIRST(stacks->b), chunk))
+		while (!in_chunk(first(stacks->b), chunk))
 			rotate_b(stacks, 1);
 		push_a(stacks);
 		remaining--;

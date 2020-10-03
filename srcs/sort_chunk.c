@@ -35,9 +35,9 @@ static int	find_position(t_twlist *lst, int x, int max_moves, t_chunk *chunk)
 	if (max_moves == 0)
 		return (0);
 	i = 0;
-	if (x > FIRST(lst))
+	if (x > first(lst))
 	{
-		while (i < max_moves && x > FIRST(lst) && in_chunk(FIRST(lst), chunk))
+		while (i < max_moves && x > first(lst) && in_chunk(first(lst), chunk))
 		{
 			lst = lst->next;
 			i++;
@@ -45,8 +45,8 @@ static int	find_position(t_twlist *lst, int x, int max_moves, t_chunk *chunk)
 	}
 	else
 	{
-		while (i > -max_moves && x < FIRST(lst) && in_chunk(PREV(lst), chunk)
-				&& x < PREV(lst))
+		while (i > -max_moves && x < first(lst) && in_chunk(prev(lst), chunk)
+				&& x < prev(lst))
 		{
 			lst = lst->prev;
 			i--;
@@ -61,16 +61,16 @@ void		sort_b_n(t_stacks *stacks, t_chunk *chunk, int remaining)
 
 	while (remaining > 0)
 	{
-		if (remaining == 2 && FIRST(stacks->b) > SECOND(stacks->b))
+		if (remaining == 2 && first(stacks->b) > second(stacks->b))
 			swap_b(stacks);
-		position = find_position(stacks->a, FIRST(stacks->b),
+		position = find_position(stacks->a, first(stacks->b),
 					chunk->size - remaining, chunk);
 		rotate_a(stacks, position);
 		reverse_rotate_a(stacks, position);
 		push_a(stacks);
 		remaining--;
 	}
-	while (in_chunk(FIRST(stacks->a), chunk))
+	while (in_chunk(first(stacks->a), chunk))
 		rotate_a(stacks, 1);
 }
 
@@ -78,13 +78,13 @@ static void	sort_b(t_stacks *stacks, t_chunk *chunk)
 {
 	if (chunk->size == 1)
 		exec_operations(stacks, "pa\nra\n");
-	else if (chunk->size == 2 && FIRST(stacks->b) > SECOND(stacks->b))
+	else if (chunk->size == 2 && first(stacks->b) > second(stacks->b))
 		exec_operations(stacks, "pa\npa\nra\nra\n");
 	else if (chunk->size == 2)
 		exec_operations(stacks, "pa\nra\npa\nra\n");
 	else if (chunk->size == 3)
-		return (sort_b_3(stacks, FIRST(stacks->b), SECOND(stacks->b),
-				THIRD(stacks->b)));
+		return (sort_b_3(stacks, first(stacks->b), second(stacks->b),
+				third(stacks->b)));
 	else
 		return (sort_b_n(stacks, chunk, chunk->size));
 }

@@ -14,24 +14,6 @@
 # define PUSH_SWAP_H
 
 # include "libft.h"
-# include <stdio.h>
-# include <stdint.h>
-
-# define FIRST(x) *(int *)x->content
-# define SECOND(x) *(int *)x->next->content
-# define THIRD(x) *(int *)x->next->next->content
-# define PREV(x) *(int *)x->prev->content
-# define CHUNK(x) ((t_chunk *)x->content)
-
-typedef struct		s_nbrs
-{
-	int	nb_fwd;
-	int	moves_fwd;
-	int	pos_fwd;
-	int	nb_rev;
-	int	moves_rev;
-	int pos_rev;
-}					t_nbrs;
 
 typedef struct		s_chunk
 {
@@ -49,36 +31,41 @@ typedef struct		s_stacks
 	int			*last_sorted;
 }					t_stacks;
 
-int		init_stack(char **argv, t_twlist **stack_a);
-void	swap_a(t_stacks *stacks);
-void	swap_b(t_stacks *stacks);
-void	swap_ab(t_stacks *stacks);
-void	push_a(t_stacks *stacks);
-void	push_b(t_stacks *stacks);
-void	rotate_a(t_stacks *stacks, int times);
-void	rotate_b(t_stacks *stacks, int times);
-void	rotate_ab(t_stacks *stacks);
-void	reverse_rotate_a(t_stacks *stacks, int times);
-void	reverse_rotate_b(t_stacks *stacks, int times);
-void	reverse_rotate_ab(t_stacks *stacks);
-int		check_order(t_twlist *stack);
-int		exec_operation(char *instruction, t_stacks *stacks);
-int		print_error(void);
-void	exec_operations(t_stacks *stacks, char *ops);
-void	sort_chunk(t_stacks *stacks, t_chunk *chunk);
-void	sort_small(t_stacks *stacks, t_chunk *chunk);
-void	sort_stack(t_stacks *stacks, int size);
-void	append_op(t_twlist **oplist, char *op);
-int		*init_array(t_twlist *lst, int size);
-t_btree	*calculate_chunks(int *numbers, int size);
-void	move_chunk_to_b(t_stacks *stacks, t_chunk *chunk);
-void	move_chunk_to_a(t_stacks *stacks, t_chunk *chunk);
-int		in_chunk(int x, t_chunk *chunk);
-int		calc_chunk_moves(t_twlist *lst, t_chunk *chunk);
-int		find_nearest_in_chunk(t_twlist *lst, t_chunk *chunk);
-void	new_last_sorted(t_stacks *stacks, int x);
-int		find_x(t_twlist *lst, int x);
-void	sort_b_n(t_stacks *stacks, t_chunk *chunk, int remaining);
-void	sort_a(t_stacks *stacks, t_chunk *chunk);
+int					init_stack(char **argv, t_twlist **stack_a);
+void				swap_a(t_stacks *stacks);
+void				swap_b(t_stacks *stacks);
+void				swap_ab(t_stacks *stacks);
+void				push_a(t_stacks *stacks);
+void				push_b(t_stacks *stacks);
+void				rotate_a(t_stacks *stacks, int times);
+void				rotate_b(t_stacks *stacks, int times);
+void				rotate_ab(t_stacks *stacks);
+void				reverse_rotate_a(t_stacks *stacks, int times);
+void				reverse_rotate_b(t_stacks *stacks, int times);
+void				reverse_rotate_ab(t_stacks *stacks);
+int					check_order(t_twlist *stack);
+int					exec_operation(char *instruction, t_stacks *stacks);
+int					print_error(void);
+void				exec_operations(t_stacks *stacks, char *ops);
+void				sort_chunk(t_stacks *stacks, t_chunk *chunk);
+void				sort_small(t_stacks *stacks, t_chunk *chunk);
+void				sort_stack(t_stacks *stacks);
+void				append_op(t_twlist **oplist, char *op);
+int					*init_array(t_twlist *lst, int size);
+t_btree				*calculate_chunks(int *numbers, int size);
+void				move_chunk_to_b(t_stacks *stacks, t_chunk *chunk);
+void				move_chunk_to_a(t_stacks *stacks, t_chunk *chunk);
+int					in_chunk(int x, t_chunk *chunk);
+int					calc_chunk_moves(t_twlist *lst, t_chunk *chunk);
+int					find_nearest_in_chunk(t_twlist *lst, t_chunk *chunk);
+void				new_last_sorted(t_stacks *stacks, int x);
+int					find_x(t_twlist *lst, int x);
+void				sort_b_n(t_stacks *stacks, t_chunk *chunk, int remaining);
+void				sort_a(t_stacks *stacks, t_chunk *chunk);
+int					first(t_twlist *lst);
+int					second(t_twlist *lst);
+int					third(t_twlist *lst);
+int					prev(t_twlist *lst);
+t_chunk				*chunk(t_btree *node);
 
 #endif
