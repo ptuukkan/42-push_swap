@@ -95,5 +95,9 @@ void		sort_chunk(t_stacks *stacks, t_chunk *chunk)
 		sort_a(stacks, chunk);
 	else
 		sort_b(stacks, chunk);
-	new_last_sorted(stacks, chunk->high);
+	if (stacks->last_sorted == NULL)
+		stacks->last_sorted = (int *)ft_memdup(&chunk->high,
+								stacks->a->content_size);
+	else if (chunk->high > *stacks->last_sorted)
+		ft_memcpy(stacks->last_sorted, &chunk->high, stacks->a->content_size);
 }

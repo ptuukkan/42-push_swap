@@ -58,7 +58,6 @@ void				move_chunk_to_a(t_stacks *stacks, t_chunk *chunk);
 int					in_chunk(int x, t_chunk *chunk);
 int					calc_chunk_moves(t_twlist *lst, t_chunk *chunk);
 int					find_nearest_in_chunk(t_twlist *lst, t_chunk *chunk);
-void				new_last_sorted(t_stacks *stacks, int x);
 int					find_x(t_twlist *lst, int x);
 void				sort_b_n(t_stacks *stacks, t_chunk *chunk, int remaining);
 void				sort_a(t_stacks *stacks, t_chunk *chunk);

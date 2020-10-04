@@ -25,13 +25,6 @@ int		in_chunk(int x, t_chunk *chunk)
 	return (0);
 }
 
-void	new_last_sorted(t_stacks *stacks, int x)
-{
-	if (stacks->last_sorted == NULL)
-		stacks->last_sorted = (int *)ft_memdup(&x, stacks->a->content_size);
-	else if (x > *stacks->last_sorted)
-		ft_memcpy(stacks->last_sorted, &x, stacks->a->content_size);
-}
 
 int		find_nearest_in_chunk(t_twlist *lst, t_chunk *chunk)
 {
