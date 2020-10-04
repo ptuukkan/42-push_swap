@@ -24,7 +24,7 @@ OBJDIR = objects
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
 INC = includes/
 
-GCC = gcc -Werror -Wextra -Wall -g
+GCC = gcc -Werror -Wextra -Wall -O3
 
 all: $(NAME) $(CHECKER)
 
