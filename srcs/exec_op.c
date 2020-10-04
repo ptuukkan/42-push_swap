@@ -12,22 +12,6 @@
 
 #include "push_swap.h"
 
-int		check_order(t_twlist *stack)
-{
-	int	nb1;
-	int	nb2;
-
-	while (stack->end == 0)
-	{
-		nb1 = first(stack);
-		nb2 = second(stack);
-		if (nb1 > nb2)
-			return (0);
-		stack = stack->next;
-	}
-	return (1);
-}
-
 int		exec_operation(char *op, t_stacks *stacks)
 {
 	if (ft_strequ(op, "sa"))

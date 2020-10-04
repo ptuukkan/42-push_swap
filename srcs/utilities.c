@@ -73,3 +73,19 @@ int		find_x(t_twlist *lst, int x)
 		return (rev);
 	return (fwd);
 }
+
+int		check_order(t_twlist *stack)
+{
+	int	nb1;
+	int	nb2;
+
+	while (stack->end == 0)
+	{
+		nb1 = first(stack);
+		nb2 = second(stack);
+		if (nb1 > nb2)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
+}

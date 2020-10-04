@@ -14,7 +14,7 @@ CHECKER = checker
 NAME = push_swap
 LIB = libft.a
 SRCDIR = srcs
-SRCS = exec_and_check.c init_stack.c push_operations.c rotate_operations.c \
+SRCS = exec_op.c init_stack.c push_operations.c rotate_operations.c \
 		reverse_rotate_operations.c swap_operations.c calculate_chunks.c \
 		sort_stack.c init_array.c sort_small.c sort_chunk.c \
 		append_op.c utilities.c sort_chunk_a.c data_access.c \
