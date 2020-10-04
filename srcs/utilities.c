@@ -25,7 +25,6 @@ int		in_chunk(int x, t_chunk *chunk)
 	return (0);
 }
 
-
 int		find_nearest_in_chunk(t_twlist *lst, t_chunk *chunk)
 {
 	int			fwd;
