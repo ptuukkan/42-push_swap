@@ -14,7 +14,7 @@
 
 void	rotate_a(t_stacks *stacks, int times)
 {
-	if (stacks->a == NULL || stacks->a->next == NULL)
+	if (stacks->a == NULL || stacks->a->next == stacks->a)
 		return ;
 	while (times > 0)
 	{
@@ -28,7 +28,7 @@ void	rotate_a(t_stacks *stacks, int times)
 
 void	rotate_b(t_stacks *stacks, int times)
 {
-	if (stacks->b == NULL || stacks->b->next == NULL)
+	if (stacks->b == NULL || stacks->b->next == stacks->b)
 		return ;
 	while (times > 0)
 	{
