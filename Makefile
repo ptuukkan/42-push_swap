@@ -6,7 +6,7 @@
 #    By: ptuukkan <ptuukkan@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/18 12:36:17 by ptuukkan          #+#    #+#              #
-#    Updated: 2019/11/06 09:36:48 by ptuukkan         ###   ########.fr        #
+#    Updated: 2021/07/30 13:17:11 by ptuukkan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +27,6 @@ INC = includes/
 GCC = gcc -Werror -Wextra -Wall -O3
 
 all: $(NAME) $(CHECKER)
-
-test:
-	$(GCC) main.c libft/libft.a -I includes/ -I libft/includes/
 
 $(NAME): $(OBJS) objects/push_swap.o libft/$(LIB)
 	$(GCC) $(OBJS) objects/push_swap.o -o $(NAME) libft/$(LIB)
@@ -58,4 +55,4 @@ fclean : clean
 
 re: fclean all
 
-.PHONY: clean fclean all buildlib test
+.PHONY: clean fclean all buildlib

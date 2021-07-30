@@ -6,7 +6,7 @@
 /*   By: ptuukkan <ptuukkan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 11:52:25 by ptuukkan          #+#    #+#             */
-/*   Updated: 2019/11/06 09:36:10 by ptuukkan         ###   ########.fr       */
+/*   Updated: 2021/07/30 13:20:46 by ptuukkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,11 @@ int			init_stack(char **argv, t_twlist **stack_a)
 		while (numbers[i])
 		{
 			if (!valid_number(numbers[i], &lnb, &nb, stack_a))
+			{
+				ft_strarrdel(&numbers);
+				ft_twlstdel(stack_a, &ft_lstfree);
 				return (0);
+			}
 			ft_twlstapp(stack_a, ft_twlstnew(&nb, sizeof(nb)));
 			i++;
 		}
